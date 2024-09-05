@@ -8,8 +8,8 @@ args = [
     '--hidden-import=zeroconf',
     '--hidden-import=zeroconf._utils.ipaddress',
     '--hidden-import=zeroconf._handlers.answers',
-    '--onedir',
-    '--name=CODENAME Nugget',
+    '--onefile',
+    '--name=Nugget',
 ]
 
 PyInstaller.__main__.run(args)
