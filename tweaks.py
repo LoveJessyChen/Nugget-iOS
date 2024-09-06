@@ -93,7 +93,7 @@ class FeatureFlagTweak(Tweak):
         return plist
     
 tweaks = [
-    MobileGestaltTweak("Toggle Dynamic Island", "oPeik/9e8lQWMszEjbPzng", "ArtworkDeviceSubType", 2556),
+    MobileGestaltTweak("Toggle Dynamic Island", "oPeik/9e8lQWMszEjbPzng", "ArtworkDeviceSubType", 2796),
     MobileGestaltTweak("Set Device Model Name", "oPeik/9e8lQWMszEjbPzng", "ArtworkDeviceProductDescription", "", TweakModifyType.TEXT),
     # MobileGestaltTweak("Fix Dynamic Island", "YlEtTtHlNesRBMal1CqRaA"),
     # MobileGestaltTweak("Set Dynamic Island Location", "Zg7DduDoSCy6vY6mhy3n2w", value="{ x: 390.000000, y: 205.848432, width: 50.000000, height: 105.651573 }"), # not sure what value this is supposed to be but it removes the island currently

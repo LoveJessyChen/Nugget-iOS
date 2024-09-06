@@ -48,7 +48,7 @@ while running:
     """)
     print("by LeminLimez")
     print("Thanks @disfordottie for the clock animation")
-    print("v1.5\n")
+    print("v1.5.1\n")
     print("Please back up your device before using!")
 
     while device == None:
@@ -59,7 +59,7 @@ while running:
                 try:
                     ld = create_using_usbmux(serial=current_device.serial)
                     vals = ld.all_values
-                    device = Device(name=vals['DeviceName'], version=vals['ProductVersion'], ld=ld)
+                    device = Device(name=vals['DeviceName'], version=vals['ProductVersion'], model=vals['ProductType'], ld=ld)
                 except Exception as e:
                     print(traceback.format_exc())
                     input("Press Enter to continue...")
@@ -93,6 +93,12 @@ while running:
                 gestalt_plist = plistlib.load(in_fp)
             # create the other plists
             flag_plist: dict = {}
+
+            # verify the device credentials before continuing
+            if gestalt_plist["CacheExtra"]["qNNddlUK+B/YlooNoymwgA"] != device.version or gestalt_plist["CacheExtra"]["0+nc/Udy4WNG8S+Q7a/s1A"] != device.model:
+                print("com.apple.mobilegestalt.plist does not match the device!")
+                input("Please make sure you are using the correct file!")
+                continue # break applying and return to the main page
             
             # set the plist keys
             for tweak in tweaks:

@@ -1,9 +1,10 @@
 from pymobiledevice3.lockdown import LockdownClient
 
 class Device:
-    def __init__(self, name: str, version: str, ld: LockdownClient):
+    def __init__(self, name: str, version: str, model: str, ld: LockdownClient):
         self.name = name
         self.version = version
+        self.model = model
         self.ld = ld
 
 class Version:
