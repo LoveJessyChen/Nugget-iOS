@@ -8,6 +8,7 @@ args = [
     '--hidden-import=zeroconf',
     '--hidden-import=zeroconf._utils.ipaddress',
     '--hidden-import=zeroconf._handlers.answers',
+    '--add-data=files/:./files',
     '--onefile',
     '--name=Nugget',
 ]

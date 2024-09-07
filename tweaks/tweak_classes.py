@@ -4,6 +4,7 @@ from constants import Version
 class TweakModifyType(Enum):
     TOGGLE = 1
     TEXT = 2
+    PICKER = 3
 
 class Tweak:
     def __init__(
@@ -49,6 +50,34 @@ class MobileGestaltTweak(Tweak):
             plist["CacheExtra"][self.key][self.subkey] = new_value
         return plist
     
+class MobileGestaltPickerTweak(Tweak):
+    def __init__(
+            self, label: str,
+            key: str, subkey: str = None,
+            values: list = [True],
+            min_version: Version = Version("1.0"),
+            divider_below: bool = False
+        ):
+        super().__init__(label=label, key=key, subkey=subkey, value=values, edit_type=TweakModifyType.PICKER, min_version=min_version, divider_below=divider_below)
+        self.selected_option = 0 # index of the selected option
+
+    def apply_tweak(self, plist: dict):
+        if not self.enabled:
+            return plist
+        new_value = self.value[self.selected_option]
+        if self.subkey == None:
+            plist["CacheExtra"][self.key] = new_value
+        else:
+            plist["CacheExtra"][self.key][self.subkey] = new_value
+        return plist
+    
+    def set_selected_option(self, new_option: int):
+        self.selected_option = new_option
+        self.enabled = True
+
+    def get_selected_option(self) -> int:
+        return self.selected_option
+    
 class MobileGestaltMultiTweak(Tweak):
     def __init__(self, label: str, keyValues: dict, min_version: Version = Version("1.0"), divider_below: bool = False):
         super().__init__(label=label, key=None, min_version=min_version, divider_below=divider_below)
@@ -91,26 +120,3 @@ class FeatureFlagTweak(Tweak):
             else:
                 plist[self.flag_category][flag] = to_enable
         return plist
-    
-tweaks = [
-    MobileGestaltTweak("Toggle Dynamic Island", "oPeik/9e8lQWMszEjbPzng", "ArtworkDeviceSubType", 2796),
-    MobileGestaltTweak("Set Device Model Name", "oPeik/9e8lQWMszEjbPzng", "ArtworkDeviceProductDescription", "", TweakModifyType.TEXT),
-    # MobileGestaltTweak("Fix Dynamic Island", "YlEtTtHlNesRBMal1CqRaA"),
-    # MobileGestaltTweak("Set Dynamic Island Location", "Zg7DduDoSCy6vY6mhy3n2w", value="{ x: 390.000000, y: 205.848432, width: 50.000000, height: 105.651573 }"), # not sure what value this is supposed to be but it removes the island currently
-    MobileGestaltTweak("Toggle Boot Chime", "DeviceSupportsBootChime"),
-    MobileGestaltTweak("Toggle Charge Limit", "DeviceSupports80ChargeLimit"),
-    MobileGestaltTweak("Disable Wallpaper Parallax", "UIParallaxCapability", value=False),
-    MobileGestaltTweak("Toggle Stage Manager Supported (WARNING: risky on some devices, mainly phones)", "DeviceSupportsEnhancedMultitasking", value=1),
-    MobileGestaltMultiTweak("Disable Region Restrictions (ie. Shutter Sound)", {"h63QSdBCiT/z0WU6rdQv6Q": "US", "zHeENZu+wbg7PUprwNwBWg": "LL/A"}),
-    MobileGestaltTweak("Toggle Apple Pencil", "DeviceSupportsApplePencil"),
-    MobileGestaltTweak("Toggle Action Button", "RingerButtonCapability"),
-    MobileGestaltTweak("Toggle Internal Storage (WARNING: May be risky for some devices)", "InternalBuild"),
-    MobileGestaltMultiTweak("Always On Display",
-                            {"DeviceSupportsAlwaysOnDisplay": True, "DeviceSupportsAlwaysOnTime": True},
-                            min_version=Version("18.0"), divider_below=True),
-    FeatureFlagTweak("Toggle Lockscreen Clock Animation and more", flag_category='SpringBoard',
-                     flag_names=['AutobahnQuickSwitchTransition', 'SlipSwitch', 'PosterEditorKashida', 'SwiftUITimeAnimation'],
-                     min_version=Version("18.0")),
-    FeatureFlagTweak("Enable Old Photo UI", flag_category='Photo', flag_names=['Lemonade'], is_list=False, inverted=True, min_version=Version("18.0")),
-    FeatureFlagTweak("Enable Apple Intelligence", flag_category='SpringBoard', flag_names=['Domino', 'SuperDomino'], min_version=Version("19.0")) # note: this doesn't work
-]
