@@ -144,6 +144,14 @@ class DeviceManager:
             QMessageBox.information(None, "Success!", "All done! Your device will now restart.")
             update_label("Success!")
         except Exception as e:
-            print(traceback.format_exc())
-            update_label("Failed to restore")
-            show_error_msg(type(e).__name__)
+            if "Find My" in str(e):
+                detailsBox = QMessageBox()
+                detailsBox.setIcon(QMessageBox.Critical)
+                detailsBox.setWindowTitle("Error!")
+                detailsBox.setText("Find My must be disabled in order to use this tool.")
+                detailsBox.setDetailedText("Disable Find My from Settings (Settings -> [Your Name] -> Find My) and then try again.")
+                detailsBox.exec()
+            else:
+                print(traceback.format_exc())
+                update_label("Failed to restore")
+                show_error_msg(type(e).__name__)
