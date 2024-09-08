@@ -1,6 +1,6 @@
 from .tweak_classes import Tweak, TweakModifyType
 from exploit.restore import FileToRestore
-from constants import Version
+from devicemanagement.constants import Version
 
 import plistlib
 import sys
@@ -33,9 +33,7 @@ class EligibilityTweak(Tweak):
 
     def set_region_code(self, new_code: str):
         if new_code == '':
-            self.set_enabled(False)
-        elif len(new_code) != 2:
-            raise InvalidRegionCodeException
+            self.code = "US"
         else:
             self.code = new_code
 

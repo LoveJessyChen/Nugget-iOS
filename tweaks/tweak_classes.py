@@ -1,5 +1,5 @@
 from enum import Enum
-from constants import Version
+from devicemanagement.constants import Version
 
 class TweakModifyType(Enum):
     TOGGLE = 1
@@ -28,9 +28,10 @@ class Tweak:
         self.enabled = value
     def toggle_enabled(self):
         self.enabled = not self.enabled
-    def set_value(self, new_value: any):
+    def set_value(self, new_value: any, toggle_enabled: bool = True):
         self.value = new_value
-        self.enabled = True
+        if toggle_enabled:
+            self.enabled = True
 
     def is_compatible(self, device_ver: str):
         return Version(device_ver) >= self.min_version
