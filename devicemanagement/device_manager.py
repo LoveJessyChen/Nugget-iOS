@@ -155,3 +155,28 @@ class DeviceManager:
                 print(traceback.format_exc())
                 update_label("Failed to restore")
                 show_error_msg(type(e).__name__)
+
+    ## RESETTING MOBILE GESTALT
+    def reset_mobilegestalt(self, update_label=lambda x: None):
+        # restore to the device
+        update_label("Restoring to device...")
+        try:
+            restore_files(files=[FileToRestore(
+                    contents=b"",
+                    restore_path="/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/",
+                    restore_name="com.apple.MobileGestalt.plist"
+                )], reboot=True, lockdown_client=self.data_singleton.current_device.ld)
+            QMessageBox.information(None, "Success!", "All done! Your device will now restart.")
+            update_label("Success!")
+        except Exception as e:
+            if "Find My" in str(e):
+                detailsBox = QMessageBox()
+                detailsBox.setIcon(QMessageBox.Critical)
+                detailsBox.setWindowTitle("Error!")
+                detailsBox.setText("Find My must be disabled in order to use this tool.")
+                detailsBox.setDetailedText("Disable Find My from Settings (Settings -> [Your Name] -> Find My) and then try again.")
+                detailsBox.exec()
+            else:
+                print(traceback.format_exc())
+                update_label("Failed to restore")
+                show_error_msg(type(e).__name__)

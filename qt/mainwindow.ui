@@ -243,7 +243,7 @@ QSlider::tick:horizontal {
 }</string>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
+                <iconset>
                  <normaloff>:/icon/phone.svg</normaloff>:/icon/phone.svg</iconset>
                </property>
               </widget>
@@ -308,7 +308,7 @@ QSlider::tick:horizontal {
 }</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/arrow-clockwise.svg</normaloff>:/icon/arrow-clockwise.svg</iconset>
             </property>
             <property name="checkable">
@@ -415,7 +415,7 @@ QSlider::tick:horizontal {
              <string>    Home</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/house.svg</normaloff>:/icon/house.svg</iconset>
             </property>
             <property name="checkable">
@@ -450,7 +450,7 @@ QSlider::tick:horizontal {
              <string>    Explore</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/compass.svg</normaloff>:/icon/compass.svg</iconset>
             </property>
             <property name="checkable">
@@ -479,7 +479,7 @@ QSlider::tick:horizontal {
              <string>    Location Simulation</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/geo-alt.svg</normaloff>:/icon/geo-alt.svg</iconset>
             </property>
             <property name="checkable">
@@ -523,7 +523,7 @@ QSlider::tick:horizontal {
              <string>    Custom Operations</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/pencil.svg</normaloff>:/icon/pencil.svg</iconset>
             </property>
             <property name="checkable">
@@ -552,7 +552,7 @@ QSlider::tick:horizontal {
              <string>     Mobile Gestalt</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/iphone-island.svg</normaloff>:/icon/iphone-island.svg</iconset>
             </property>
             <property name="iconSize">
@@ -596,7 +596,7 @@ QSlider::tick:horizontal {
              <string>    Feature Flags</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/flag.svg</normaloff>:/icon/flag.svg</iconset>
             </property>
             <property name="checkable">
@@ -625,7 +625,7 @@ QSlider::tick:horizontal {
              <string>    EU Enabler</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/geo-alt.svg</normaloff>:/icon/geo-alt.svg</iconset>
             </property>
             <property name="checkable">
@@ -654,7 +654,7 @@ QSlider::tick:horizontal {
              <string>    Internal Options</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/hdd.svg</normaloff>:/icon/hdd.svg</iconset>
             </property>
             <property name="checkable">
@@ -698,7 +698,7 @@ QSlider::tick:horizontal {
              <string>    Apply</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/check-circle.svg</normaloff>:/icon/check-circle.svg</iconset>
             </property>
             <property name="checkable">
@@ -727,7 +727,7 @@ QSlider::tick:horizontal {
              <string>    Settings</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/icon/gear.svg</normaloff>:/icon/gear.svg</iconset>
             </property>
             <property name="checkable">
@@ -836,7 +836,7 @@ QSlider::tick:horizontal {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/phone.svg</normaloff>:/icon/phone.svg</iconset>
                    </property>
                   </widget>
@@ -965,7 +965,7 @@ QSlider::tick:horizontal {
                     <string>...</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/credits/big_nugget.png</normaloff>:/credits/big_nugget.png</iconset>
                    </property>
                    <property name="iconSize">
@@ -1044,7 +1044,7 @@ QSlider::tick:horizontal {
                        <string>  Join the Discord</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/discord.svg</normaloff>:/icon/discord.svg</iconset>
                       </property>
                       <property name="toolButtonStyle">
@@ -1143,7 +1143,7 @@ QSlider::tick:horizontal {
                        <string>  LeminLimez</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/credits/LeminLimez.png</normaloff>:/credits/LeminLimez.png</iconset>
                       </property>
                       <property name="toolButtonStyle">
@@ -1170,7 +1170,7 @@ QToolButton:pressed {
                        <string>...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/twitter.svg</normaloff>:/icon/twitter.svg</iconset>
                       </property>
                      </widget>
@@ -1195,7 +1195,7 @@ QToolButton:pressed {
                        <string>...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/currency-dollar.svg</normaloff>:/icon/currency-dollar.svg</iconset>
                       </property>
                      </widget>
@@ -1518,7 +1518,7 @@ QToolButton:pressed {
               <item>
                <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Nugget GUI - Version 2.0.1</string>
+                 <string>Nugget GUI - Version 2.2</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1568,7 +1568,7 @@ QToolButton:pressed {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/compass.svg</normaloff>:/icon/compass.svg</iconset>
                    </property>
                   </widget>
@@ -1698,7 +1698,7 @@ QToolButton:pressed {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/geo-alt.svg</normaloff>:/icon/geo-alt.svg</iconset>
                    </property>
                   </widget>
@@ -1983,7 +1983,7 @@ QToolButton:pressed {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/iphone-island.svg</normaloff>:/icon/iphone-island.svg</iconset>
                    </property>
                    <property name="iconSize">
@@ -2077,7 +2077,7 @@ QToolButton:pressed {
                        <string>...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/folder.svg</normaloff>:/icon/folder.svg</iconset>
                       </property>
                      </widget>
@@ -2088,7 +2088,7 @@ QToolButton:pressed {
                        <string>...</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/file-earmark-zip.svg</normaloff>:/icon/file-earmark-zip.svg</iconset>
                       </property>
                      </widget>
@@ -2276,7 +2276,7 @@ QToolButton:pressed {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/iphone-island.svg</normaloff>:/icon/iphone-island.svg</iconset>
                    </property>
                    <property name="iconSize">
@@ -2523,6 +2523,16 @@ QComboBox QAbstractItemView::item:hover {
                          <string>2976 (iPhone 15 Pro Max Dynamic Island)</string>
                         </property>
                        </item>
+                       <item>
+                        <property name="text">
+                         <string>2622 (iPhone 16 Pro Dynamic Island)</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>2868 (iPhone 16 Pro Max Dynamic Island)</string>
+                        </property>
+                       </item>
                       </widget>
                      </item>
                      <item>
@@ -2550,6 +2560,20 @@ QComboBox QAbstractItemView::item:hover {
                       <widget class="QCheckBox" name="chargeLimitChk">
                        <property name="text">
                         <string>Enable Charge Limit</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QCheckBox" name="tapToWakeChk">
+                       <property name="text">
+                        <string>Enable Tap to Wake (for iPhone SEs)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QCheckBox" name="iphone16SettingsChk">
+                       <property name="text">
+                        <string>Enable iPhone 16 Settings</string>
                        </property>
                       </widget>
                      </item>
@@ -2680,6 +2704,13 @@ QComboBox QAbstractItemView::item:hover {
                       </widget>
                      </item>
                      <item>
+                      <widget class="QCheckBox" name="sleepApneaChk">
+                       <property name="text">
+                        <string>Enable Sleep Apnea (real) [for Apple Watches]</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
                       <widget class="QCheckBox" name="aodChk">
                        <property name="text">
                         <string>Enable Always On Display</string>
@@ -2755,7 +2786,7 @@ QComboBox QAbstractItemView::item:hover {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/pencil.svg</normaloff>:/icon/pencil.svg</iconset>
                    </property>
                    <property name="iconSize">
@@ -2886,7 +2917,7 @@ QComboBox QAbstractItemView::item:hover {
                       <string>  Import .cowperation</string>
                      </property>
                      <property name="icon">
-                      <iconset resource="resources.qrc">
+                      <iconset>
                        <normaloff>:/icon/import.svg</normaloff>:/icon/import.svg</iconset>
                      </property>
                      <property name="iconSize">
@@ -2921,7 +2952,7 @@ QComboBox QAbstractItemView::item:hover {
                       <string>  New Operation</string>
                      </property>
                      <property name="icon">
-                      <iconset resource="resources.qrc">
+                      <iconset>
                        <normaloff>:/icon/plus.svg</normaloff>:/icon/plus.svg</iconset>
                      </property>
                      <property name="iconSize">
@@ -3008,7 +3039,7 @@ QComboBox QAbstractItemView::item:hover {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/gear.svg</normaloff>:/icon/gear.svg</iconset>
                    </property>
                   </widget>
@@ -3193,7 +3224,7 @@ QComboBox QAbstractItemView::item:hover {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/flag.svg</normaloff>:/icon/flag.svg</iconset>
                    </property>
                   </widget>
@@ -3408,7 +3439,7 @@ QComboBox QAbstractItemView::item:hover {
 }</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="resources.qrc">
+                    <iconset>
                      <normaloff>:/icon/geo-alt.svg</normaloff>:/icon/geo-alt.svg</iconset>
                    </property>
                   </widget>
@@ -3652,7 +3683,7 @@ QComboBox QAbstractItemView::item:hover {
 }</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/check-circle.svg</normaloff>:/icon/check-circle.svg</iconset>
                       </property>
                      </widget>
@@ -3776,7 +3807,7 @@ QComboBox QAbstractItemView::item:hover {
                       <string>  Choose Gestalt File</string>
                      </property>
                      <property name="icon">
-                      <iconset resource="resources.qrc">
+                      <iconset>
                        <normaloff>:/icon/folder.svg</normaloff>:/icon/folder.svg</iconset>
                      </property>
                      <property name="toolButtonStyle">
@@ -3807,7 +3838,7 @@ QComboBox QAbstractItemView::item:hover {
                        <string>  Apply Changes</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
+                       <iconset>
                         <normaloff>:/icon/check-circle.svg</normaloff>:/icon/check-circle.svg</iconset>
                       </property>
                       <property name="toolButtonStyle">
@@ -3895,6 +3926,13 @@ QComboBox QAbstractItemView::item:hover {
                      <widget class="QToolButton" name="removeTweaksBtn">
                       <property name="text">
                        <string>Remove All Tweaks</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="resetGestaltBtn">
+                      <property name="text">
+                       <string>Reset Mobile Gestalt</string>
                       </property>
                      </widget>
                     </item>

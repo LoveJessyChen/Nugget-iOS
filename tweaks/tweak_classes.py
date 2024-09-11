@@ -10,7 +10,7 @@ class Tweak:
     def __init__(
             self, label: str,
             key: str, subkey: str = None,
-            value: any = True,
+            value: any = 1,
             edit_type: TweakModifyType = TweakModifyType.TOGGLE,
             min_version: Version = Version("1.0"),
             divider_below: bool = False
@@ -55,7 +55,7 @@ class MobileGestaltPickerTweak(Tweak):
     def __init__(
             self, label: str,
             key: str, subkey: str = None,
-            values: list = [True],
+            values: list = [1],
             min_version: Version = Version("1.0"),
             divider_below: bool = False
         ):

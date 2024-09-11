@@ -83,6 +83,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.applyTweaksBtn.clicked.connect(self.on_applyPageBtn_clicked)
         self.ui.removeTweaksBtn.clicked.connect(self.on_removeTweaksBtn_clicked)
         self.ui.chooseGestaltBtn.clicked.connect(self.on_chooseGestaltBtn_clicked)
+        self.ui.resetGestaltBtn.clicked.connect(self.on_resetGestaltBtn_clicked)
 
         ## MOBILE GESTALT PAGE ACTIONS
         self.ui.dynamicIslandDrp.activated.connect(self.on_dynamicIslandDrp_activated)
@@ -91,6 +92,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.bootChimeChk.clicked.connect(self.on_bootChimeChk_clicked)
         self.ui.chargeLimitChk.clicked.connect(self.on_chargeLimitChk_clicked)
+        self.ui.tapToWakeChk.clicked.connect(self.on_tapToWakeChk_clicked)
+        self.ui.iphone16SettingsChk.clicked.connect(self.on_iphone16SettingsChk_clicked)
         self.ui.parallaxChk.clicked.connect(self.on_parallaxChk_clicked)
         self.ui.stageManagerChk.clicked.connect(self.on_stageManagerChk_clicked)
         self.ui.ipadAppsChk.clicked.connect(self.on_ipadAppsChk_clicked)
@@ -102,6 +105,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.internalStorageChk.clicked.connect(self.on_internalStorageChk_clicked)
         self.ui.collisionSOSChk.clicked.connect(self.on_collisionSOSChk_clicked)
         self.ui.aodChk.clicked.connect(self.on_aodChk_clicked)
+        self.ui.sleepApneaChk.clicked.connect(self.on_sleepApneaChk_clicked)
 
 
     ## GENERAL INTERFACE FUNCTIONS
@@ -166,11 +170,22 @@ class MainWindow(QtWidgets.QMainWindow):
         if len(self.device_manager.devices) > 0:
             self.device_manager.set_current_device(index=index)
             # hide options that are for newer versions
+            # remove the new dynamic island options
+            try:
+                self.ui.dynamicIslandDrp.removeItem(6)
+                self.ui.dynamicIslandDrp.removeItem(5)
+            except:
+                pass
             if Version(self.device_manager.data_singleton.current_device.version) >= Version("18.0"):
                 self.ui.aodChk.show()
+                self.ui.sleepApneaChk.show()
                 self.ui.featureFlagsPageBtn.show()
+                # show the other dynamic island options
+                self.ui.dynamicIslandDrp.addItem("2622 (iPhone 16 Pro Dynamic Island)")
+                self.ui.dynamicIslandDrp.addItem("2868 (iPhone 16 Pro Max Dynamic Island)")
             else:
                 self.ui.aodChk.hide()
+                self.ui.sleepApneaChk.hide()
                 self.ui.featureFlagsPageBtn.hide()
         else:
             self.device_manager.set_current_device(index=None)
@@ -289,6 +304,10 @@ class MainWindow(QtWidgets.QMainWindow):
         tweaks["BootChime"].set_enabled(checked)
     def on_chargeLimitChk_clicked(self, checked: bool):
         tweaks["ChargeLimit"].set_enabled(checked)
+    def on_tapToWakeChk_clicked(self, checked: bool):
+        tweaks["TapToWake"].set_enabled(checked)
+    def on_iphone16SettingsChk_clicked(self, checked: bool):
+        tweaks["CameraButton"].set_enabled(checked)
     def on_parallaxChk_clicked(self, checked: bool):
         tweaks["Parallax"].set_enabled(checked)
 
@@ -297,6 +316,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_ipadAppsChk_clicked(self, checked: bool):
         tweaks["iPadApps"].set_enabled(checked)
     def on_shutterChk_clicked(self, checked: bool):
+        # TODO: allow the user to select the region
         tweaks["Shutter"].set_enabled(checked)
     def on_pencilChk_clicked(self, checked: bool):
         tweaks["Pencil"].set_enabled(checked)
@@ -312,6 +332,8 @@ class MainWindow(QtWidgets.QMainWindow):
         tweaks["CollisionSOS"].set_enabled(checked)
     def on_aodChk_clicked(self, checked: bool):
         tweaks["AOD"].set_enabled(checked)
+    def on_sleepApneaChk_clicked(self, checked: bool):
+        tweaks["SleepApnea"].set_enabled(checked)
 
     
     ## FEATURE FLAGS PAGE
@@ -382,6 +404,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_removeTweaksBtn_clicked(self):
         # TODO: Add safety here
         self.device_manager.apply_changes(resetting=True, update_label=self.update_label)
+    def on_resetGestaltBtn_clicked(self):
+        self.device_manager.reset_mobilegestalt(update_label=self.update_label)
 
     @QtCore.Slot()
     def on_applyTweaksBtn_clicked(self):

@@ -48,7 +48,7 @@ while running:
 '---'                       \\   \\  /   \\   \\  /   `----'              
                              `--`-'     `--`-'                        
     """)
-    print("CLI v2.0.1")
+    print("CLI v2.2")
     print("by LeminLimez")
     print("Thanks @disfordottie for the clock animation and @lrdsnow for EU Enabler\n")
     print("Please back up your device before using!")
@@ -88,6 +88,7 @@ while running:
         # apply will still be the number of tweaks just to keep consistency
         print(f"\n{get_apply_number(num_tweaks + 1)}. Apply")
         print(f"{get_apply_number(num_tweaks + 1) + 1}. Remove All Tweaks")
+        print(f"{get_apply_number(num_tweaks + 1) + 2}. Reset Mobile Gestalt")
         print("0. Exit\n")
         page = int(input("Enter a number: "))
         if page == get_apply_number(num_tweaks + 1) or page == get_apply_number(num_tweaks + 1) + 1:
@@ -113,7 +114,7 @@ while running:
             
             # set the plist keys
             if not resetting:
-                for tweak in tweaks:
+                for tweak in tweaks.values:
                     if isinstance(tweak, FeatureFlagTweak):
                         flag_plist = tweak.apply_tweak(flag_plist)
                     elif isinstance(tweak, EligibilityTweak):
@@ -140,6 +141,20 @@ while running:
             # restore to the device
             try:
                 restore_files(files=files_to_restore, reboot=True, lockdown_client=device.ld)
+            except Exception as e:
+                print(traceback.format_exc())
+            finally:
+                input("Press Enter to exit...")
+                running = False
+        elif page == get_apply_number(num_tweaks + 1) + 2:
+            # reset mobilegestalt
+            # restore to the device
+            try:
+                restore_files(files=[FileToRestore(
+                    contents=b"",
+                    restore_path="/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/",
+                    restore_name="com.apple.MobileGestalt.plist"
+                )], reboot=True, lockdown_client=device.ld)
             except Exception as e:
                 print(traceback.format_exc())
             finally:

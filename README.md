@@ -11,6 +11,7 @@ Note: I am not responsible if your device bootloops. Please back up your data be
 - Change Device Model Name (ie what shows in the Settings app)
 - Enable Boot Chime
 - Enable Charge Limit
+- Enable iPhone 16 Settings
 - Enable Collision SOS
 - Enable Stage Manager
 - Disable the Wallpaper Parallax
