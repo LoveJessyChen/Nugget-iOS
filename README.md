@@ -1,5 +1,7 @@
 # Nugget
-Unlock your device's full potential! Works on all versions iOS 17.0+
+Unlock your device's full potential! Works on all versions iOS 17.0-18.1 beta 4
+
+Sparserestore was patched in iOS 18.1 beta 5. It will not be supported, please stop asking.
 
 This uses the sparserestore exploit to write to files outside of the intended restore location, like mobilegestalt.
 
@@ -11,6 +13,7 @@ Note: I am not responsible if your device bootloops. Please back up your data be
 - Change Device Model Name (ie what shows in the Settings app)
 - Enable Boot Chime
 - Enable Charge Limit
+- Enable Tap to Wake on unsupported devices (ie iPhone SEs)
 - Enable iPhone 16 Settings
 - Enable Collision SOS
 - Enable Stage Manager
@@ -24,6 +27,8 @@ Note: I am not responsible if your device bootloops. Please back up your data be
 - Enabling lock screen clock animation, lock screen page duplication button, and more!
 - Disabling the new iOS 18 Photos UI
 - EU Enabler
+- Springboard Options (from Cowabunga Lite)
+- Internal Options (from Cowabunga Lite)
 
 ## Running the Program
 Requirements:
