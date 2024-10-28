@@ -64,7 +64,10 @@ To compile the resources file for Python, run the following command:
 The application itself can be compiled by running `compile.py`.
 
 ## Credits
+
+- [LeminLimez](https://github.com/leminlimez/Nugget) for Nugget
 - [JJTech](https://github.com/JJTech0130) for Sparserestore/[TrollRestore](https://github.com/JJTech0130/TrollRestore)
 - [pymobiledevice3](https://github.com/doronz88/pymobiledevice3)
 - [disfordottie](https://x.com/disfordottie) for some global flag features
+
 
