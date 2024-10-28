@@ -953,7 +953,7 @@ class Ui_Nugget(object):
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.gestaltPageContent = QWidget(self.scrollAreaWidgetContents)
         self.gestaltPageContent.setObjectName(u"gestaltPageContent")
-        self.gestaltPageContent.setEnabled(False)
+        self.gestaltPageContent.setEnabled(True)
         self.verticalLayout_8 = QVBoxLayout(self.gestaltPageContent)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
@@ -1049,14 +1049,6 @@ class Ui_Nugget(object):
 
         self.verticalLayout_8.addWidget(self.parallaxChk)
 
-        self.horizontalWidget4 = QWidget(self.gestaltPageContent)
-        self.horizontalWidget4.setObjectName(u"horizontalWidget4")
-        self.horizontalLayout_10 = QHBoxLayout(self.horizontalWidget4)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
-
-        self.verticalLayout_8.addWidget(self.horizontalWidget4)
-
         self.line_7 = QFrame(self.gestaltPageContent)
         self.line_7.setObjectName(u"line_7")
         self.line_7.setStyleSheet(u"QFrame {\n"
@@ -1137,15 +1129,71 @@ class Ui_Nugget(object):
 
         self.verticalLayout_8.addWidget(self.collisionSOSChk)
 
-        self.sleepApneaChk = QCheckBox(self.gestaltPageContent)
-        self.sleepApneaChk.setObjectName(u"sleepApneaChk")
-
-        self.verticalLayout_8.addWidget(self.sleepApneaChk)
-
         self.aodChk = QCheckBox(self.gestaltPageContent)
         self.aodChk.setObjectName(u"aodChk")
 
         self.verticalLayout_8.addWidget(self.aodChk)
+
+        self.line_22 = QFrame(self.gestaltPageContent)
+        self.line_22.setObjectName(u"line_22")
+        self.line_22.setStyleSheet(u"QFrame {\n"
+"	color: #414141;\n"
+"}")
+        self.line_22.setFrameShadow(QFrame.Plain)
+        self.line_22.setFrameShape(QFrame.HLine)
+
+        self.verticalLayout_8.addWidget(self.line_22)
+
+        self.horizontalLayout_11 = QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(-1, -1, -1, 0)
+        self.label_10 = QLabel(self.gestaltPageContent)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setEnabled(True)
+
+        self.horizontalLayout_11.addWidget(self.label_10)
+
+        self.addGestaltKeyBtn = QToolButton(self.gestaltPageContent)
+        self.addGestaltKeyBtn.setObjectName(u"addGestaltKeyBtn")
+        self.addGestaltKeyBtn.setEnabled(True)
+        icon18 = QIcon()
+        icon18.addFile(u":/icon/plus.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.addGestaltKeyBtn.setIcon(icon18)
+        self.addGestaltKeyBtn.setCheckable(False)
+        self.addGestaltKeyBtn.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+
+        self.horizontalLayout_11.addWidget(self.addGestaltKeyBtn)
+
+
+        self.verticalLayout_8.addLayout(self.horizontalLayout_11)
+
+        self.label_12 = QLabel(self.gestaltPageContent)
+        self.label_12.setObjectName(u"label_12")
+
+        self.verticalLayout_8.addWidget(self.label_12)
+
+        self.line_23 = QFrame(self.gestaltPageContent)
+        self.line_23.setObjectName(u"line_23")
+        self.line_23.setStyleSheet(u"QFrame {\n"
+"	color: #414141;\n"
+"}")
+        self.line_23.setFrameShadow(QFrame.Plain)
+        self.line_23.setFrameShape(QFrame.HLine)
+
+        self.verticalLayout_8.addWidget(self.line_23)
+
+        self.customKeysCnt = QWidget(self.gestaltPageContent)
+        self.customKeysCnt.setObjectName(u"customKeysCnt")
+        self.customKeysCnt.setEnabled(True)
+        self.verticalLayout_32 = QVBoxLayout(self.customKeysCnt)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.customKeysLayout = QVBoxLayout()
+        self.customKeysLayout.setObjectName(u"customKeysLayout")
+
+        self.verticalLayout_32.addLayout(self.customKeysLayout)
+
+
+        self.verticalLayout_8.addWidget(self.customKeysCnt)
 
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -1408,28 +1456,89 @@ class Ui_Nugget(object):
 
         self.verticalLayout_16.addWidget(self.enableAIChk)
 
-        self.languageLbl = QLabel(self.euEnablerPageContent)
+        self.aiEnablerContent = QWidget(self.euEnablerPageContent)
+        self.aiEnablerContent.setObjectName(u"aiEnablerContent")
+        self.verticalLayout_34 = QVBoxLayout(self.aiEnablerContent)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.verticalLayout_34.setContentsMargins(0, 5, 0, 5)
+        self.languageLbl = QLabel(self.aiEnablerContent)
         self.languageLbl.setObjectName(u"languageLbl")
 
-        self.verticalLayout_16.addWidget(self.languageLbl)
+        self.verticalLayout_34.addWidget(self.languageLbl)
 
-        self.languageTxt = QLineEdit(self.euEnablerPageContent)
+        self.languageTxt = QLineEdit(self.aiEnablerContent)
         self.languageTxt.setObjectName(u"languageTxt")
 
-        self.verticalLayout_16.addWidget(self.languageTxt)
+        self.verticalLayout_34.addWidget(self.languageTxt)
 
-        self.aiInfoLabel = QLabel(self.euEnablerPageContent)
+        self.line_21 = QFrame(self.aiEnablerContent)
+        self.line_21.setObjectName(u"line_21")
+        self.line_21.setStyleSheet(u"QFrame {\n"
+"	color: #414141;\n"
+"}")
+        self.line_21.setFrameShadow(QFrame.Plain)
+        self.line_21.setFrameShape(QFrame.HLine)
+
+        self.verticalLayout_34.addWidget(self.line_21)
+
+        self.aiInfoLabel = QLabel(self.aiEnablerContent)
         self.aiInfoLabel.setObjectName(u"aiInfoLabel")
         sizePolicy1.setHeightForWidth(self.aiInfoLabel.sizePolicy().hasHeightForWidth())
         self.aiInfoLabel.setSizePolicy(sizePolicy1)
         self.aiInfoLabel.setTextFormat(Qt.AutoText)
 
-        self.verticalLayout_16.addWidget(self.aiInfoLabel)
+        self.verticalLayout_34.addWidget(self.aiInfoLabel)
 
-        self.spoofModelChk = QCheckBox(self.euEnablerPageContent)
-        self.spoofModelChk.setObjectName(u"spoofModelChk")
+        self.label_8 = QLabel(self.aiEnablerContent)
+        self.label_8.setObjectName(u"label_8")
 
-        self.verticalLayout_16.addWidget(self.spoofModelChk)
+        self.verticalLayout_34.addWidget(self.label_8)
+
+        self.spoofedModelDrp = QComboBox(self.aiEnablerContent)
+        self.spoofedModelDrp.addItem("")
+        self.spoofedModelDrp.addItem("")
+        self.spoofedModelDrp.addItem("")
+        self.spoofedModelDrp.addItem("")
+        self.spoofedModelDrp.addItem("")
+        self.spoofedModelDrp.setObjectName(u"spoofedModelDrp")
+        self.spoofedModelDrp.setMaximumSize(QSize(325, 16777215))
+        self.spoofedModelDrp.setStyleSheet(u"QComboBox {\n"
+"	background-color: #3b3b3b;\n"
+"    border: none;\n"
+"    color: #e8e8e8;\n"
+"    font-size: 14px;\n"
+"	padding-left: 8px;\n"
+"	border-radius: 8px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    image: url(:/icon/caret-down-fill.svg);\n"
+"	icon-size: 16px;\n"
+"    subcontrol-position: right center;\n"
+"	margin-right: 8px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"	background-color: #3b3b3b;\n"
+"    outline: none;\n"
+"	margin-top: 1px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"	background-color: #3b3b3b;\n"
+"	color: #e8e8e8;\n"
+"    padding-left: 8px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item:hover {\n"
+"    background-color: #535353;\n"
+"    color: #ffffff;\n"
+"}")
+
+        self.verticalLayout_34.addWidget(self.spoofedModelDrp)
+
+
+        self.verticalLayout_16.addWidget(self.aiEnablerContent)
 
         self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -1839,9 +1948,9 @@ class Ui_Nugget(object):
         self.horizontalLayout_7.setContentsMargins(-1, 10, -1, 0)
         self.chooseGestaltBtn = QToolButton(self.verticalWidget2)
         self.chooseGestaltBtn.setObjectName(u"chooseGestaltBtn")
-        icon18 = QIcon()
-        icon18.addFile(u":/icon/folder.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.chooseGestaltBtn.setIcon(icon18)
+        icon19 = QIcon()
+        icon19.addFile(u":/icon/folder.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.chooseGestaltBtn.setIcon(icon19)
         self.chooseGestaltBtn.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
 
         self.horizontalLayout_7.addWidget(self.chooseGestaltBtn)
@@ -1849,12 +1958,12 @@ class Ui_Nugget(object):
 
         self.verticalLayout_24.addLayout(self.horizontalLayout_7)
 
-        self.horizontalWidget5 = QWidget(self.verticalWidget2)
-        self.horizontalWidget5.setObjectName(u"horizontalWidget5")
-        self.horizontalLayout_17 = QHBoxLayout(self.horizontalWidget5)
+        self.horizontalWidget4 = QWidget(self.verticalWidget2)
+        self.horizontalWidget4.setObjectName(u"horizontalWidget4")
+        self.horizontalLayout_17 = QHBoxLayout(self.horizontalWidget4)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.applyTweaksBtn = QToolButton(self.horizontalWidget5)
+        self.applyTweaksBtn = QToolButton(self.horizontalWidget4)
         self.applyTweaksBtn.setObjectName(u"applyTweaksBtn")
         self.applyTweaksBtn.setIcon(icon9)
         self.applyTweaksBtn.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
@@ -1862,7 +1971,7 @@ class Ui_Nugget(object):
         self.horizontalLayout_17.addWidget(self.applyTweaksBtn)
 
 
-        self.verticalLayout_24.addWidget(self.horizontalWidget5)
+        self.verticalLayout_24.addWidget(self.horizontalWidget4)
 
         self.statusLbl = QLabel(self.verticalWidget2)
         self.statusLbl.setObjectName(u"statusLbl")
@@ -1884,21 +1993,21 @@ class Ui_Nugget(object):
 
         self.verticalLayout_24.addItem(self.verticalSpacer_2)
 
-        self.horizontalWidget6 = QWidget(self.verticalWidget2)
-        self.horizontalWidget6.setObjectName(u"horizontalWidget6")
-        self.horizontalLayout_25 = QHBoxLayout(self.horizontalWidget6)
+        self.horizontalWidget5 = QWidget(self.verticalWidget2)
+        self.horizontalWidget5.setObjectName(u"horizontalWidget5")
+        self.horizontalLayout_25 = QHBoxLayout(self.horizontalWidget5)
         self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
         self.horizontalLayout_25.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_25.addItem(self.horizontalSpacer_14)
 
-        self.removeTweaksBtn = QToolButton(self.horizontalWidget6)
+        self.removeTweaksBtn = QToolButton(self.horizontalWidget5)
         self.removeTweaksBtn.setObjectName(u"removeTweaksBtn")
 
         self.horizontalLayout_25.addWidget(self.removeTweaksBtn)
 
-        self.resetGestaltBtn = QToolButton(self.horizontalWidget6)
+        self.resetGestaltBtn = QToolButton(self.horizontalWidget5)
         self.resetGestaltBtn.setObjectName(u"resetGestaltBtn")
 
         self.horizontalLayout_25.addWidget(self.resetGestaltBtn)
@@ -1908,7 +2017,7 @@ class Ui_Nugget(object):
         self.horizontalLayout_25.addItem(self.horizontalSpacer_16)
 
 
-        self.verticalLayout_24.addWidget(self.horizontalWidget6)
+        self.verticalLayout_24.addWidget(self.horizontalWidget5)
 
 
         self.verticalLayout_6.addWidget(self.verticalWidget2)
@@ -1987,6 +2096,33 @@ class Ui_Nugget(object):
         self.allowWifiApplyingChk.setChecked(True)
 
         self._21.addWidget(self.allowWifiApplyingChk)
+
+        self.skipSetupChk = QCheckBox(self.settingsPageContent)
+        self.skipSetupChk.setObjectName(u"skipSetupChk")
+        self.skipSetupChk.setChecked(True)
+
+        self._21.addWidget(self.skipSetupChk)
+
+        self.line_20 = QFrame(self.settingsPageContent)
+        self.line_20.setObjectName(u"line_20")
+        self.line_20.setStyleSheet(u"QFrame {\n"
+"	color: #414141;\n"
+"}")
+        self.line_20.setFrameShadow(QFrame.Plain)
+        self.line_20.setFrameShape(QFrame.HLine)
+
+        self._21.addWidget(self.line_20)
+
+        self.deviceSettingsBtns = QHBoxLayout()
+        self.deviceSettingsBtns.setObjectName(u"deviceSettingsBtns")
+        self.deviceSettingsBtns.setContentsMargins(-1, -1, -1, 0)
+        self.resetPairBtn = QToolButton(self.settingsPageContent)
+        self.resetPairBtn.setObjectName(u"resetPairBtn")
+
+        self.deviceSettingsBtns.addWidget(self.resetPairBtn)
+
+
+        self._21.addLayout(self.deviceSettingsBtns)
 
         self.verticalSpacer_51 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -2101,18 +2237,18 @@ class Ui_Nugget(object):
 
         self.verticalLayout_29.addWidget(self.longitudeTxt)
 
-        self.horizontalWidget7 = QWidget(self.verticalWidget3)
-        self.horizontalWidget7.setObjectName(u"horizontalWidget7")
-        self.horizontalLayout_3 = QHBoxLayout(self.horizontalWidget7)
+        self.horizontalWidget6 = QWidget(self.verticalWidget3)
+        self.horizontalWidget6.setObjectName(u"horizontalWidget6")
+        self.horizontalLayout_3 = QHBoxLayout(self.horizontalWidget6)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.setLocationBtn = QToolButton(self.horizontalWidget7)
+        self.setLocationBtn = QToolButton(self.horizontalWidget6)
         self.setLocationBtn.setObjectName(u"setLocationBtn")
 
         self.horizontalLayout_3.addWidget(self.setLocationBtn)
 
 
-        self.verticalLayout_29.addWidget(self.horizontalWidget7)
+        self.verticalLayout_29.addWidget(self.horizontalWidget6)
 
         self.horizontalWidget_22 = QWidget(self.verticalWidget3)
         self.horizontalWidget_22.setObjectName(u"horizontalWidget_22")
@@ -2159,9 +2295,9 @@ class Ui_Nugget(object):
 "	padding-right: 5px;\n"
 "	border-radius: 0px;\n"
 "}")
-        icon19 = QIcon()
-        icon19.addFile(u":/icon/pencil.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.toolButton_12.setIcon(icon19)
+        icon20 = QIcon()
+        icon20.addFile(u":/icon/pencil.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.toolButton_12.setIcon(icon20)
         self.toolButton_12.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_22.addWidget(self.toolButton_12)
@@ -2222,9 +2358,9 @@ class Ui_Nugget(object):
         self.importOperationBtn = QToolButton(self.customOperationsPageContent)
         self.importOperationBtn.setObjectName(u"importOperationBtn")
         self.importOperationBtn.setEnabled(True)
-        icon20 = QIcon()
-        icon20.addFile(u":/icon/import.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.importOperationBtn.setIcon(icon20)
+        icon21 = QIcon()
+        icon21.addFile(u":/icon/import.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.importOperationBtn.setIcon(icon21)
         self.importOperationBtn.setIconSize(QSize(20, 20))
         self.importOperationBtn.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
 
@@ -2236,9 +2372,7 @@ class Ui_Nugget(object):
         sizePolicy2.setHeightForWidth(self.newOperationBtn.sizePolicy().hasHeightForWidth())
         self.newOperationBtn.setSizePolicy(sizePolicy2)
         self.newOperationBtn.setMinimumSize(QSize(0, 35))
-        icon21 = QIcon()
-        icon21.addFile(u":/icon/plus.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.newOperationBtn.setIcon(icon21)
+        self.newOperationBtn.setIcon(icon18)
         self.newOperationBtn.setIconSize(QSize(16, 16))
         self.newOperationBtn.setCheckable(False)
         self.newOperationBtn.setAutoExclusive(True)
@@ -2379,12 +2513,12 @@ class Ui_Nugget(object):
 
         self.horizontalLayout_23.addItem(self.horizontalSpacer_10)
 
-        self.horizontalWidget8 = QWidget(self.horizontalWidget_8)
-        self.horizontalWidget8.setObjectName(u"horizontalWidget8")
-        self.horizontalLayout_26 = QHBoxLayout(self.horizontalWidget8)
+        self.horizontalWidget7 = QWidget(self.horizontalWidget_8)
+        self.horizontalWidget7.setObjectName(u"horizontalWidget7")
+        self.horizontalLayout_26 = QHBoxLayout(self.horizontalWidget7)
         self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
         self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
-        self.importThemeBtn = QToolButton(self.horizontalWidget8)
+        self.importThemeBtn = QToolButton(self.horizontalWidget7)
         self.importThemeBtn.setObjectName(u"importThemeBtn")
         self.importThemeBtn.setEnabled(False)
         self.importThemeBtn.setStyleSheet(u"QToolButton {\n"
@@ -2393,13 +2527,13 @@ class Ui_Nugget(object):
 
         self.horizontalLayout_26.addWidget(self.importThemeBtn)
 
-        self.importThemeFolderBtn = QToolButton(self.horizontalWidget8)
+        self.importThemeFolderBtn = QToolButton(self.horizontalWidget7)
         self.importThemeFolderBtn.setObjectName(u"importThemeFolderBtn")
-        self.importThemeFolderBtn.setIcon(icon18)
+        self.importThemeFolderBtn.setIcon(icon19)
 
         self.horizontalLayout_26.addWidget(self.importThemeFolderBtn)
 
-        self.importThemeZipBtn = QToolButton(self.horizontalWidget8)
+        self.importThemeZipBtn = QToolButton(self.horizontalWidget7)
         self.importThemeZipBtn.setObjectName(u"importThemeZipBtn")
         icon22 = QIcon()
         icon22.addFile(u":/icon/file-earmark-zip.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -2408,7 +2542,7 @@ class Ui_Nugget(object):
         self.horizontalLayout_26.addWidget(self.importThemeZipBtn)
 
 
-        self.horizontalLayout_23.addWidget(self.horizontalWidget8)
+        self.horizontalLayout_23.addWidget(self.horizontalWidget7)
 
 
         self.verticalLayout_23.addWidget(self.horizontalWidget_8)
@@ -2458,26 +2592,26 @@ class Ui_Nugget(object):
 
         self.verticalLayout_22.addItem(self.verticalSpacer_9)
 
-        self.horizontalWidget9 = QWidget(self.themesPageContent)
-        self.horizontalWidget9.setObjectName(u"horizontalWidget9")
-        self.horizontalLayout_16 = QHBoxLayout(self.horizontalWidget9)
+        self.horizontalWidget8 = QWidget(self.themesPageContent)
+        self.horizontalWidget8.setObjectName(u"horizontalWidget8")
+        self.horizontalLayout_16 = QHBoxLayout(self.horizontalWidget8)
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.hideNamesBtn = QToolButton(self.horizontalWidget9)
+        self.hideNamesBtn = QToolButton(self.horizontalWidget8)
         self.hideNamesBtn.setObjectName(u"hideNamesBtn")
         sizePolicy2.setHeightForWidth(self.hideNamesBtn.sizePolicy().hasHeightForWidth())
         self.hideNamesBtn.setSizePolicy(sizePolicy2)
 
         self.horizontalLayout_16.addWidget(self.hideNamesBtn)
 
-        self.borderAllBtn = QToolButton(self.horizontalWidget9)
+        self.borderAllBtn = QToolButton(self.horizontalWidget8)
         self.borderAllBtn.setObjectName(u"borderAllBtn")
         sizePolicy2.setHeightForWidth(self.borderAllBtn.sizePolicy().hasHeightForWidth())
         self.borderAllBtn.setSizePolicy(sizePolicy2)
 
         self.horizontalLayout_16.addWidget(self.borderAllBtn)
 
-        self.addAllBtn = QToolButton(self.horizontalWidget9)
+        self.addAllBtn = QToolButton(self.horizontalWidget8)
         self.addAllBtn.setObjectName(u"addAllBtn")
         sizePolicy2.setHeightForWidth(self.addAllBtn.sizePolicy().hasHeightForWidth())
         self.addAllBtn.setSizePolicy(sizePolicy2)
@@ -2485,7 +2619,7 @@ class Ui_Nugget(object):
         self.horizontalLayout_16.addWidget(self.addAllBtn)
 
 
-        self.verticalLayout_22.addWidget(self.horizontalWidget9)
+        self.verticalLayout_22.addWidget(self.horizontalWidget8)
 
 
         self.verticalLayout_23.addWidget(self.themesPageContent)
@@ -2507,6 +2641,7 @@ class Ui_Nugget(object):
         self.devicePicker.setCurrentIndex(-1)
         self.pages.setCurrentIndex(0)
         self.dynamicIslandDrp.setCurrentIndex(0)
+        self.spoofedModelDrp.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Nugget)
@@ -2559,7 +2694,7 @@ class Ui_Nugget(object):
         self.toolButton_15.setText(QCoreApplication.translate("Nugget", u"Additional Thanks", None))
         self.libiBtn.setText(QCoreApplication.translate("Nugget", u"pymobiledevice3", None))
         self.qtBtn.setText(QCoreApplication.translate("Nugget", u"Qt Creator", None))
-        self.label.setText(QCoreApplication.translate("Nugget", u"Nugget GUI - Version 3.0", None))
+        self.label.setText(QCoreApplication.translate("Nugget", u"Nugget GUI - Version 3.1 (beta 3)", None))
         self.statusBarLbl.setText(QCoreApplication.translate("Nugget", u"Mobile Gestalt", None))
         self.label_9.setText(QCoreApplication.translate("Nugget", u"Device Subtype Preset", None))
         self.dynamicIslandDrp.setItemText(0, QCoreApplication.translate("Nugget", u"None", None))
@@ -2589,8 +2724,11 @@ class Ui_Nugget(object):
         self.internalInstallChk.setText(QCoreApplication.translate("Nugget", u"Set as Apple Internal Install (ie Metal HUD in any app)", None))
         self.internalStorageChk.setText(QCoreApplication.translate("Nugget", u"Enable Internal Storage (WARNING: risky for some devices, mainly iPads)", None))
         self.collisionSOSChk.setText(QCoreApplication.translate("Nugget", u"Enable Collision SOS", None))
-        self.sleepApneaChk.setText(QCoreApplication.translate("Nugget", u"Enable Sleep Apnea (real) [for Apple Watches]", None))
         self.aodChk.setText(QCoreApplication.translate("Nugget", u"Enable Always On Display", None))
+        self.label_10.setText(QCoreApplication.translate("Nugget", u"Custom Gestalt Keys", None))
+        self.addGestaltKeyBtn.setText(QCoreApplication.translate("Nugget", u"  Add Key", None))
+        self.label_12.setText(QCoreApplication.translate("Nugget", u"Warning: Using this feature incorrectly can lead to bootloops and data loss. Only use if you know\n"
+"what you are doing.", None))
         self.internalOptionsLbl.setText(QCoreApplication.translate("Nugget", u"Feature Flags", None))
         self.clockAnimChk.setText(QCoreApplication.translate("Nugget", u"Enable Lockscreen Clock Animation", None))
         self.lockscreenChk.setText(QCoreApplication.translate("Nugget", u"Enable Duplicate Lockscreen Button and Lockscreen Quickswitch", None))
@@ -2610,9 +2748,16 @@ class Ui_Nugget(object):
         self.aiInfoLabel.setText(QCoreApplication.translate("Nugget", u"In order to download the AI model, you must spoof the device model. This will break Face ID until\n"
 "you revert.\n"
 "\n"
-"Once the model has downloaded, disable \"Spoof Device Model\" and click the \"Apply Tweaks\"\n"
+"Once the model has downloaded, set \"Spoofed Device Model\" to \"None\" and click the \"Apply Tweaks\"\n"
 "button on the \"Apply\" page again to fix Face ID.", None))
-        self.spoofModelChk.setText(QCoreApplication.translate("Nugget", u"Spoof Device Model", None))
+        self.label_8.setText(QCoreApplication.translate("Nugget", u"Spoofed Device Model", None))
+        self.spoofedModelDrp.setItemText(0, QCoreApplication.translate("Nugget", u"None", None))
+        self.spoofedModelDrp.setItemText(1, QCoreApplication.translate("Nugget", u"iPhone16,2 (iPhone 15 Pro)", None))
+        self.spoofedModelDrp.setItemText(2, QCoreApplication.translate("Nugget", u"iPhone17,3 (iPhone 16 Pro)", None))
+        self.spoofedModelDrp.setItemText(3, QCoreApplication.translate("Nugget", u"iPhone17,4 (iPhone 16 Pro Max)", None))
+        self.spoofedModelDrp.setItemText(4, QCoreApplication.translate("Nugget", u"iPad16,3 (iPad Pro M4)", None))
+
+        self.spoofedModelDrp.setCurrentText(QCoreApplication.translate("Nugget", u"None", None))
         self.springboardOptionsLbl.setText(QCoreApplication.translate("Nugget", u"Springboard Options", None))
         self.label_13.setText(QCoreApplication.translate("Nugget", u"Lock Screen Footnote Text", None))
         self.footnoteTxt.setPlaceholderText(QCoreApplication.translate("Nugget", u"Footnote Text", None))
@@ -2648,6 +2793,8 @@ class Ui_Nugget(object):
         self.resetGestaltBtn.setText(QCoreApplication.translate("Nugget", u"Reset Mobile Gestalt", None))
         self.springboardOptionsLbl1.setText(QCoreApplication.translate("Nugget", u"Nugget Settings", None))
         self.allowWifiApplyingChk.setText(QCoreApplication.translate("Nugget", u"Allow Applying Over WiFi", None))
+        self.skipSetupChk.setText(QCoreApplication.translate("Nugget", u"Skip Setup (non-exploit files only)", None))
+        self.resetPairBtn.setText(QCoreApplication.translate("Nugget", u"Reset Device Pairing", None))
         self.statusBarLbl_2.setText(QCoreApplication.translate("Nugget", u"Location Simulation", None))
         self.label_4.setText("")
         self.loadLocSimBtn.setText(QCoreApplication.translate("Nugget", u"Start Location Simulation", None))

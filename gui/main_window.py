@@ -1,4 +1,4 @@
-from PySide6 import QtCore, QtWidgets
+from PySide6 import QtCore, QtWidgets, QtGui
 from enum import Enum
 import webbrowser
 import plistlib
@@ -13,6 +13,7 @@ from devicemanagement.device_manager import DeviceManager
 from gui.gestalt_dialog import GestaltDialog
 
 from tweaks.tweaks import tweaks
+from tweaks.custom_gestalt_tweaks import CustomGestaltTweaks, ValueTypeStrings
 
 class Page(Enum):
     Home = 0
@@ -76,7 +77,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.enableAIChk.toggled.connect(self.on_enableAIChk_toggled)
         self.ui.languageTxt.textEdited.connect(self.on_languageTxt_textEdited)
-        self.ui.spoofModelChk.toggled.connect(self.on_spoofModelChk_toggled)
+        self.ui.spoofedModelDrp.activated.connect(self.on_spoofedModelDrp_activated)
 
         ## FEATURE FLAGS PAGE
         self.ui.clockAnimChk.toggled.connect(self.on_clockAnimChk_toggled)
@@ -115,6 +116,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.chooseGestaltBtn.clicked.connect(self.on_chooseGestaltBtn_clicked)
         self.ui.resetGestaltBtn.clicked.connect(self.on_resetGestaltBtn_clicked)
 
+        ## SETTINGS PAGE ACTIONS
+        self.ui.allowWifiApplyingChk.clicked.connect(self.on_allowWifiApplyingChk_toggled)
+        self.ui.skipSetupChk.clicked.connect(self.on_skipSetupChk_toggled)
+
+        self.ui.resetPairBtn.clicked.connect(self.on_resetPairBtn_clicked)
+
         ## MOBILE GESTALT PAGE ACTIONS
         self.ui.dynamicIslandDrp.activated.connect(self.on_dynamicIslandDrp_activated)
         self.ui.rdarFixChk.clicked.connect(self.on_rdarFixChk_clicked)
@@ -138,7 +145,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.internalStorageChk.clicked.connect(self.on_internalStorageChk_clicked)
         self.ui.collisionSOSChk.clicked.connect(self.on_collisionSOSChk_clicked)
         self.ui.aodChk.clicked.connect(self.on_aodChk_clicked)
-        self.ui.sleepApneaChk.clicked.connect(self.on_sleepApneaChk_clicked)
+
+        self.ui.addGestaltKeyBtn.clicked.connect(self.on_addGestaltKeyBtn_clicked)
 
 
     ## GENERAL INTERFACE FUNCTIONS
@@ -151,7 +159,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def refresh_devices(self):
         # get the devices
-        self.device_manager.get_devices()
+        self.device_manager.get_devices(self.settings)
         # clear the picker
         self.ui.devicePicker.clear()
         self.ui.restoreProgressBar.hide()
@@ -174,6 +182,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.ui.sidebarDiv2.hide()
             self.ui.applyPageBtn.hide()
+
+            self.ui.resetPairBtn.hide()
         else:
             self.ui.devicePicker.setEnabled(True)
             # populate the ComboBox with device names
@@ -198,13 +208,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.euEnablerPageContent.setDisabled(False)
             self.ui.springboardOptionsPageContent.setDisabled(False)
             self.ui.internalOptionsPageContent.setDisabled(False)
+
+            self.ui.resetPairBtn.show()
         
         # update the selected device
         self.ui.devicePicker.setCurrentIndex(0)
         self.change_selected_device(0)
-
-        # update the interface
-        self.updateInterfaceForNewDevice()
 
     def change_selected_device(self, index):
         if len(self.device_manager.devices) > 0:
@@ -224,20 +233,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.rdarFixChk.setText(f"{rdar_title} (modifies resolution)")
             if Version(self.device_manager.data_singleton.current_device.version) >= Version("18.1"):
                 self.ui.enableAIChk.show()
-                self.ui.languageLbl.hide()
-                self.ui.languageTxt.hide()
-                self.ui.aiInfoLabel.hide()
-                self.ui.spoofModelChk.hide()
+                self.ui.aiEnablerContent.hide()
             else:
                 self.ui.enableAIChk.hide()
-                self.ui.languageLbl.hide()
-                self.ui.languageTxt.hide()
-                self.ui.aiInfoLabel.hide()
-                self.ui.spoofModelChk.hide()
+                self.ui.aiEnablerContent.hide()
             if Version(self.device_manager.data_singleton.current_device.version) >= Version("18.0"):
                 self.ui.aodChk.show()
                 self.ui.iphone16SettingsChk.show()
-                self.ui.sleepApneaChk.show()
                 self.ui.featureFlagsPageBtn.show()
                 # show the other dynamic island options
                 self.ui.dynamicIslandDrp.addItem("2622 (iPhone 16 Pro Dynamic Island)")
@@ -245,19 +247,23 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self.ui.aodChk.hide()
                 self.ui.iphone16SettingsChk.hide()
-                self.ui.sleepApneaChk.hide()
                 self.ui.featureFlagsPageBtn.hide()
         else:
             self.device_manager.set_current_device(index=None)
-            self.ui.featureFlagsPageBtn.hide()
+
+        # update the interface
+        self.updateInterfaceForNewDevice()
 
     def loadSettings(self):
         self.settings = QtCore.QSettings()
         try:
             # load the settings
             apply_over_wifi = self.settings.value("apply_over_wifi", True, type=bool)
+            skip_setup = self.settings.value("skip_setup", True, type=bool)
             self.ui.allowWifiApplyingChk.setChecked(apply_over_wifi)
+            self.ui.skipSetupChk.setChecked(skip_setup)
             self.device_manager.apply_over_wifi = apply_over_wifi
+            self.device_manager.skip_setup = skip_setup
         except:
             pass
     
@@ -300,9 +306,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.phoneNameLbl.setText(self.device_manager.get_current_device_name())
         # version label
         ver = self.device_manager.get_current_device_version()
+        build = self.device_manager.get_current_device_build()
         self.show_uuid = False
         if ver != "":
-            self.show_version_text(version=ver)
+            self.show_version_text(version=ver, build=build)
         else:
             self.ui.phoneVersionLbl.setText("Please connect a device.")
 
@@ -310,19 +317,23 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.show_uuid:
             self.show_uuid = False
             ver = self.device_manager.get_current_device_version()
+            build = self.device_manager.get_current_device_build()
             if ver != "":
-                self.show_version_text(version=ver)
+                self.show_version_text(version=ver, build=build)
         else:
             self.show_uuid = True
             uuid = self.device_manager.get_current_device_uuid()
             if uuid != "":
                 self.ui.phoneVersionLbl.setText(f"<a style=\"text-decoration:none; color: white\" href=\"#\">{uuid}</a>")
 
-    def show_version_text(self, version: str):
+    def show_version_text(self, version: str, build: str):
         support_str: str = "<span style=\"color: #32d74b;\">Supported!</span></a>"
-        if not self.device_manager.get_current_device_supported():
+        if Version(version) < Version("17.0"):
             support_str = "<span style=\"color: #ff0000;\">Not Supported.</span></a>"
-        self.ui.phoneVersionLbl.setText(f"<a style=\"text-decoration:none; color: white;\" href=\"#\">iOS {version} {support_str}")
+        elif not self.device_manager.get_current_device_supported():
+            # sparserestore partially patched
+            support_str = "<span style=\"color: #ffff00;\">Supported, YMMV.</span></a>"
+        self.ui.phoneVersionLbl.setText(f"<a style=\"text-decoration:none; color: white;\" href=\"#\">iOS {version} ({build}) {support_str}")
 
     ## HOME PAGE LINKS
     def on_bigMilkBtn_clicked(self):
@@ -406,8 +417,66 @@ class MainWindow(QtWidgets.QMainWindow):
         tweaks["CollisionSOS"].set_enabled(checked)
     def on_aodChk_clicked(self, checked: bool):
         tweaks["AOD"].set_enabled(checked)
-    def on_sleepApneaChk_clicked(self, checked: bool):
-        tweaks["SleepApnea"].set_enabled(checked)
+
+    def update_custom_gestalt_value_type(self, id, idx, valueField: QtWidgets.QLineEdit):
+        new_str = CustomGestaltTweaks.set_tweak_value_type(id, idx)
+        # update the value
+        valueField.setText(new_str)
+
+    def delete_custom_gestalt_key(self, id: int, widget: QtWidgets.QWidget):
+        CustomGestaltTweaks.deactivate_tweak(id)
+        self.ui.customKeysLayout.removeWidget(widget)
+        widget.setParent(None)
+
+    def on_addGestaltKeyBtn_clicked(self):
+        # create a blank gestalt value with default value of 1
+        key_identifier = CustomGestaltTweaks.create_tweak()
+
+        widget = QtWidgets.QWidget()
+        widget.setFixedHeight(35)
+        widget.setStyleSheet("QWidget { background: none; border: 1px solid #3b3b3b; border-radius: 8px; }")
+        hlayout = QtWidgets.QHBoxLayout(widget)
+        hlayout.setContentsMargins(9, 2, 9, 2)
+
+        # create the key field
+        keyField = QtWidgets.QLineEdit(widget)
+        # keyField.setMaximumWidth(200)
+        keyField.setPlaceholderText("Key")
+        keyField.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
+        keyField.setTextMargins(5, 0, 5, 0)
+        keyField.textEdited.connect(lambda txt, id=key_identifier: CustomGestaltTweaks.set_tweak_key(id, txt))
+        hlayout.addWidget(keyField)
+
+        # create the delete button
+        delBtn = QtWidgets.QToolButton(widget)
+        delBtn.setIcon(QtGui.QIcon(":/icon/trash.svg"))
+        delBtn.setStyleSheet("QToolButton { margin-right: 8px; background: none; border: none; }\nQToolButton:pressed { background: none; color: #FFFFFF; }")
+        delBtn.clicked.connect(lambda _, id=key_identifier, w=widget: self.delete_custom_gestalt_key(id, w))
+        hlayout.addWidget(delBtn)
+
+        # create the type dropdown
+        valueTypeDrp = QtWidgets.QComboBox(widget)
+        valueTypeDrp.setStyleSheet("QComboBox {\n	background-color: #3b3b3b;\n    border: none;\n    color: #e8e8e8;\n    font-size: 14px;\n	padding-left: 8px;\n	border-radius: 8px;\n}\n\nQComboBox::drop-down {\n    image: url(:/icon/caret-down-fill.svg);\n	icon-size: 16px;\n    subcontrol-position: right center;\n	margin-right: 8px;\n}\n\nQComboBox QAbstractItemView {\n	background-color: #3b3b3b;\n    outline: none;\n	margin-top: 1px;\n}\n\nQComboBox QAbstractItemView::item {\n	background-color: #3b3b3b;\n	color: #e8e8e8;\n    padding-left: 8px;\n}\n\nQComboBox QAbstractItemView::item:hover {\n    background-color: #535353;\n    color: #ffffff;\n}")
+        valueTypeDrp.setFixedWidth(120)
+        valueTypeDrp.addItems(ValueTypeStrings)
+        valueTypeDrp.setCurrentIndex(0)
+
+        # create the value edit field
+        valueField = QtWidgets.QLineEdit(widget)
+        valueField.setMaximumWidth(175)
+        valueField.setPlaceholderText("Value")
+        valueField.setText("1")
+        valueField.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        valueField.setTextMargins(5, 0, 5, 0)
+        valueField.textEdited.connect(lambda txt, id=key_identifier: CustomGestaltTweaks.set_tweak_value(id, txt))
+
+        valueTypeDrp.activated.connect(lambda idx, id=key_identifier, vf=valueField: self.update_custom_gestalt_value_type(id, idx, vf))
+        hlayout.addWidget(valueTypeDrp)
+        hlayout.addWidget(valueField)
+        
+        # add it to the main widget
+        widget.setDisabled(False)
+        self.ui.customKeysLayout.addWidget(widget)
 
     
     ## FEATURE FLAGS PAGE
@@ -435,19 +504,13 @@ class MainWindow(QtWidgets.QMainWindow):
         tweaks["AIGestalt"].set_enabled(checked)
         # change the visibility of stuff
         if checked:
-            self.ui.languageLbl.show()
-            self.ui.languageTxt.show()
-            self.ui.aiInfoLabel.show()
-            self.ui.spoofModelChk.show()
+            self.ui.aiEnablerContent.show()
         else:
-            self.ui.languageLbl.hide()
-            self.ui.languageTxt.hide()
-            self.ui.aiInfoLabel.hide()
-            self.ui.spoofModelChk.hide()
+            self.ui.aiEnablerContent.hide()
     def on_languageTxt_textEdited(self, text: str):
         tweaks["AIEligibility"].set_language_code(text)
-    def on_spoofModelChk_toggled(self, checked: bool):
-        tweaks["SpoofModel"].set_enabled(checked)
+    def on_spoofedModelDrp_activated(self, index: int):
+        tweaks["SpoofModel"].set_selected_option(index)
 
 
     ## SPRINGBOARD OPTIONS PAGE
@@ -506,6 +569,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.device_manager.apply_over_wifi = checked
         # save the setting
         self.settings.setValue("apply_over_wifi", checked)
+    def on_skipSetupChk_toggled(self, checked: bool):
+        self.device_manager.skip_setup = checked
+        # save the setting
+        self.settings.setValue("skip_setup", checked)
+
+    # Device Options
+    def on_resetPairBtn_clicked(self):
+        self.device_manager.reset_device_pairing()
 
 
     ## APPLY PAGE
@@ -548,7 +619,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # TODO: Add safety here
         self.device_manager.apply_changes(resetting=True, update_label=self.update_label)
     def on_resetGestaltBtn_clicked(self):
-        self.device_manager.reset_mobilegestalt(update_label=self.update_label)
+        self.device_manager.reset_mobilegestalt(self.settings, update_label=self.update_label)
 
     @QtCore.Slot()
     def on_applyTweaksBtn_clicked(self):
