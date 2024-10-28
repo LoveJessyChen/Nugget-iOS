@@ -1,5 +1,5 @@
 # Nugget
-Unlock your device's full potential! Works on all versions iOS 17.0-18.1 beta 4
+Unlock your device's full potential! Works on all versions iOS 17.0-17.7 & 18.0-18.1 beta 4 & 18.2 beta 1.
 
 Sparserestore was patched in iOS 18.1 beta 5. It will not be supported, please stop asking.
 
