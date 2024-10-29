@@ -30,12 +30,26 @@ class DeviceManager:
         self.devices: list[Device] = []
         self.data_singleton = DataSingleton()
         self.current_device_index = 0
+
+        # preferences
         self.apply_over_wifi = True
         self.skip_setup = True
+        self.auto_reboot = True
     
     def get_devices(self, settings: QSettings):
         self.devices.clear()
-        connected_devices = usbmux.list_devices()
+        # handle errors when failing to get connected devices
+        try:
+            connected_devices = usbmux.list_devices()
+        except:
+            show_error_msg(
+                """
+                Failed to get device list. Click \"Show Details\" for the traceback.
+
+                If you are on Windows, make sure you have the \"Apple Devices\" app from the Microsoft Store or iTunes from Apple's website.
+                If you are on Linux, make sure you have usbmuxd and libimobiledevice installed.
+                """
+            )
         # Connect via usbmuxd
         for device in connected_devices:
             if self.apply_over_wifi or device.is_usb:
@@ -65,7 +79,7 @@ class DeviceManager:
                     self.devices.append(dev)
                 except Exception as e:
                     print(f"ERROR with lockdown device with UUID {device.serial}")
-                    show_error_msg(type(e).__name__)
+                    show_error_msg(type(e).__name__ + ": " + repr(e))
         
         if len(connected_devices) > 0:
             self.set_current_device(index=0)
@@ -281,8 +295,11 @@ class DeviceManager:
         # restore to the device
         update_label("Restoring to device...")
         try:
-            restore_files(files=files_to_restore, reboot=True, lockdown_client=self.data_singleton.current_device.ld)
-            QMessageBox.information(None, "Success!", "All done! Your device will now restart.")
+            restore_files(files=files_to_restore, reboot=self.auto_reboot, lockdown_client=self.data_singleton.current_device.ld)
+            msg = "Your device will now restart."
+            if not self.auto_reboot:
+                msg = "Please restart your device to see changes."
+            QMessageBox.information(None, "Success!", "All done! " + msg)
             update_label("Success!")
         except Exception as e:
             if "Find My" in str(e):
@@ -295,7 +312,7 @@ class DeviceManager:
             else:
                 print(traceback.format_exc())
                 update_label("Failed to restore")
-                show_error_msg(type(e).__name__)
+                show_error_msg(type(e).__name__ + ": " + repr(e))
 
     ## RESETTING MOBILE GESTALT
     def reset_mobilegestalt(self, settings: QSettings, update_label=lambda x: None):
@@ -309,8 +326,11 @@ class DeviceManager:
                     contents=b"",
                     restore_path=file_path,
                     domain=domain
-                )], reboot=True, lockdown_client=self.data_singleton.current_device.ld)
-            QMessageBox.information(None, "Success!", "All done! Your device will now restart.")
+                )], reboot=self.auto_reboot, lockdown_client=self.data_singleton.current_device.ld)
+            msg = "Your device will now restart."
+            if not self.auto_reboot:
+                msg = "Please restart your device to see changes."
+            QMessageBox.information(None, "Success!", "All done! " + msg)
             update_label("Success!")
         except Exception as e:
             if "Find My" in str(e):
@@ -323,4 +343,4 @@ class DeviceManager:
             else:
                 print(traceback.format_exc())
                 update_label("Failed to restore")
-                show_error_msg(type(e).__name__)
+                show_error_msg(type(e).__name__ + ": " + repr(e))

@@ -1374,23 +1374,28 @@ class Ui_Nugget(object):
 
         self.verticalLayout_17.addWidget(self.line_13)
 
-        self.euEnablerEnabledChk = QCheckBox(self.euEnablerPage)
-        self.euEnablerEnabledChk.setObjectName(u"euEnablerEnabledChk")
-
-        self.verticalLayout_17.addWidget(self.euEnablerEnabledChk)
-
         self.euEnablerPageContent = QWidget(self.euEnablerPage)
         self.euEnablerPageContent.setObjectName(u"euEnablerPageContent")
         self.euEnablerPageContent.setEnabled(False)
         self.verticalLayout_16 = QVBoxLayout(self.euEnablerPageContent)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.label_5 = QLabel(self.euEnablerPageContent)
+        self.euEnablerContent = QWidget(self.euEnablerPageContent)
+        self.euEnablerContent.setObjectName(u"euEnablerContent")
+        self.verticalLayout_36 = QVBoxLayout(self.euEnablerContent)
+        self.verticalLayout_36.setObjectName(u"verticalLayout_36")
+        self.verticalLayout_36.setContentsMargins(0, 0, 0, 0)
+        self.euEnablerEnabledChk = QCheckBox(self.euEnablerContent)
+        self.euEnablerEnabledChk.setObjectName(u"euEnablerEnabledChk")
+
+        self.verticalLayout_36.addWidget(self.euEnablerEnabledChk)
+
+        self.label_5 = QLabel(self.euEnablerContent)
         self.label_5.setObjectName(u"label_5")
 
-        self.verticalLayout_16.addWidget(self.label_5)
+        self.verticalLayout_36.addWidget(self.label_5)
 
-        self.methodChoiceDrp = QComboBox(self.euEnablerPageContent)
+        self.methodChoiceDrp = QComboBox(self.euEnablerContent)
         self.methodChoiceDrp.addItem("")
         self.methodChoiceDrp.addItem("")
         self.methodChoiceDrp.setObjectName(u"methodChoiceDrp")
@@ -1428,19 +1433,19 @@ class Ui_Nugget(object):
 "    color: #ffffff;\n"
 "}")
 
-        self.verticalLayout_16.addWidget(self.methodChoiceDrp)
+        self.verticalLayout_36.addWidget(self.methodChoiceDrp)
 
-        self.label_6 = QLabel(self.euEnablerPageContent)
+        self.label_6 = QLabel(self.euEnablerContent)
         self.label_6.setObjectName(u"label_6")
 
-        self.verticalLayout_16.addWidget(self.label_6)
+        self.verticalLayout_36.addWidget(self.label_6)
 
-        self.regionCodeTxt = QLineEdit(self.euEnablerPageContent)
+        self.regionCodeTxt = QLineEdit(self.euEnablerContent)
         self.regionCodeTxt.setObjectName(u"regionCodeTxt")
 
-        self.verticalLayout_16.addWidget(self.regionCodeTxt)
+        self.verticalLayout_36.addWidget(self.regionCodeTxt)
 
-        self.line_16 = QFrame(self.euEnablerPageContent)
+        self.line_16 = QFrame(self.euEnablerContent)
         self.line_16.setObjectName(u"line_16")
         self.line_16.setEnabled(False)
         self.line_16.setStyleSheet(u"QFrame {\n"
@@ -1449,7 +1454,10 @@ class Ui_Nugget(object):
         self.line_16.setFrameShadow(QFrame.Plain)
         self.line_16.setFrameShape(QFrame.HLine)
 
-        self.verticalLayout_16.addWidget(self.line_16)
+        self.verticalLayout_36.addWidget(self.line_16)
+
+
+        self.verticalLayout_16.addWidget(self.euEnablerContent)
 
         self.enableAIChk = QCheckBox(self.euEnablerPageContent)
         self.enableAIChk.setObjectName(u"enableAIChk")
@@ -1495,6 +1503,7 @@ class Ui_Nugget(object):
         self.verticalLayout_34.addWidget(self.label_8)
 
         self.spoofedModelDrp = QComboBox(self.aiEnablerContent)
+        self.spoofedModelDrp.addItem("")
         self.spoofedModelDrp.addItem("")
         self.spoofedModelDrp.addItem("")
         self.spoofedModelDrp.addItem("")
@@ -2103,6 +2112,21 @@ class Ui_Nugget(object):
 
         self._21.addWidget(self.skipSetupChk)
 
+        self.autoRebootChk = QCheckBox(self.settingsPageContent)
+        self.autoRebootChk.setObjectName(u"autoRebootChk")
+        self.autoRebootChk.setChecked(True)
+
+        self._21.addWidget(self.autoRebootChk)
+
+        self.verticalSpacer_21 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self._21.addItem(self.verticalSpacer_21)
+
+        self.label_15 = QLabel(self.settingsPageContent)
+        self.label_15.setObjectName(u"label_15")
+
+        self._21.addWidget(self.label_15)
+
         self.line_20 = QFrame(self.settingsPageContent)
         self.line_20.setObjectName(u"line_20")
         self.line_20.setStyleSheet(u"QFrame {\n"
@@ -2694,7 +2718,7 @@ class Ui_Nugget(object):
         self.toolButton_15.setText(QCoreApplication.translate("Nugget", u"Additional Thanks", None))
         self.libiBtn.setText(QCoreApplication.translate("Nugget", u"pymobiledevice3", None))
         self.qtBtn.setText(QCoreApplication.translate("Nugget", u"Qt Creator", None))
-        self.label.setText(QCoreApplication.translate("Nugget", u"Nugget GUI - Version 3.1 (beta 3)", None))
+        self.label.setText(QCoreApplication.translate("Nugget", u"Nugget GUI - Version 4.0", None))
         self.statusBarLbl.setText(QCoreApplication.translate("Nugget", u"Mobile Gestalt", None))
         self.label_9.setText(QCoreApplication.translate("Nugget", u"Device Subtype Preset", None))
         self.dynamicIslandDrp.setItemText(0, QCoreApplication.translate("Nugget", u"None", None))
@@ -2753,9 +2777,10 @@ class Ui_Nugget(object):
         self.label_8.setText(QCoreApplication.translate("Nugget", u"Spoofed Device Model", None))
         self.spoofedModelDrp.setItemText(0, QCoreApplication.translate("Nugget", u"None", None))
         self.spoofedModelDrp.setItemText(1, QCoreApplication.translate("Nugget", u"iPhone16,2 (iPhone 15 Pro)", None))
-        self.spoofedModelDrp.setItemText(2, QCoreApplication.translate("Nugget", u"iPhone17,3 (iPhone 16 Pro)", None))
-        self.spoofedModelDrp.setItemText(3, QCoreApplication.translate("Nugget", u"iPhone17,4 (iPhone 16 Pro Max)", None))
-        self.spoofedModelDrp.setItemText(4, QCoreApplication.translate("Nugget", u"iPad16,3 (iPad Pro M4)", None))
+        self.spoofedModelDrp.setItemText(2, QCoreApplication.translate("Nugget", u"iPhone17,4 (iPhone 16 Plus)", None))
+        self.spoofedModelDrp.setItemText(3, QCoreApplication.translate("Nugget", u"iPhone17,3 (iPhone 16 Pro)", None))
+        self.spoofedModelDrp.setItemText(4, QCoreApplication.translate("Nugget", u"iPhone17,2 (iPhone 16 Pro Max)", None))
+        self.spoofedModelDrp.setItemText(5, QCoreApplication.translate("Nugget", u"iPad16,3 (iPad Pro M4)", None))
 
         self.spoofedModelDrp.setCurrentText(QCoreApplication.translate("Nugget", u"None", None))
         self.springboardOptionsLbl.setText(QCoreApplication.translate("Nugget", u"Springboard Options", None))
@@ -2793,7 +2818,9 @@ class Ui_Nugget(object):
         self.resetGestaltBtn.setText(QCoreApplication.translate("Nugget", u"Reset Mobile Gestalt", None))
         self.springboardOptionsLbl1.setText(QCoreApplication.translate("Nugget", u"Nugget Settings", None))
         self.allowWifiApplyingChk.setText(QCoreApplication.translate("Nugget", u"Allow Applying Over WiFi", None))
-        self.skipSetupChk.setText(QCoreApplication.translate("Nugget", u"Skip Setup (non-exploit files only)", None))
+        self.skipSetupChk.setText(QCoreApplication.translate("Nugget", u"Skip Setup * (non-exploit files only)", None))
+        self.autoRebootChk.setText(QCoreApplication.translate("Nugget", u"Auto Reboot After Applying", None))
+        self.label_15.setText(QCoreApplication.translate("Nugget", u"* Note: Skip Setup may cause issues with configuration profiles. Turn it off if you need that.", None))
         self.resetPairBtn.setText(QCoreApplication.translate("Nugget", u"Reset Device Pairing", None))
         self.statusBarLbl_2.setText(QCoreApplication.translate("Nugget", u"Location Simulation", None))
         self.label_4.setText("")
