@@ -76,6 +76,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.regionCodeTxt.textEdited.connect(self.on_regionCodeTxt_textEdited)
 
         self.ui.enableAIChk.toggled.connect(self.on_enableAIChk_toggled)
+        self.ui.eligFileChk.toggled.connect(self.on_eligFileChk_toggled)
+        self.ui.experimentalChk.toggled.connect(self.on_experimentalChk_toggled)
+        self.ui.languageTxt.hide() # to be removed later
+        self.ui.languageLbl.hide() # to be removed later
         self.ui.languageTxt.textEdited.connect(self.on_languageTxt_textEdited)
         self.ui.spoofedModelDrp.activated.connect(self.on_spoofedModelDrp_activated)
 
@@ -233,12 +237,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.dynamicIslandDrp.removeItem(5)
             except:
                 pass
-            rdar_title = tweaks["RdarFix"].get_rdar_title()
-            if rdar_title == "hide":
-                self.ui.rdarFixChk.hide()
-            else:
-                self.ui.rdarFixChk.show()
-                self.ui.rdarFixChk.setText(f"{rdar_title} (modifies resolution)")
+            self.set_rdar_fix_label()
             device_ver = Version(self.device_manager.data_singleton.current_device.version)
             # toggle option visibility for the minimum versions
             for version in MinTweakVersions.keys():
@@ -274,6 +273,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.euEnablerPageBtn.show()
             else:
                 self.ui.euEnablerPageBtn.hide()
+            
+            # hide the ai content if not on
+            if device_ver >= Version("18.1") and not tweaks["AIGestalt"].enabled:
+                self.ui.aiEnablerContent.hide()
         else:
             self.device_manager.set_current_device(index=None)
 
@@ -398,12 +401,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     ## MOBILE GESTALT PAGE
+    def set_rdar_fix_label(self):
+        rdar_title = tweaks["RdarFix"].get_rdar_title()
+        if rdar_title == "hide":
+            self.ui.rdarFixChk.hide()
+        else:
+            self.ui.rdarFixChk.show()
+            self.ui.rdarFixChk.setText(f"{rdar_title} (modifies resolution)")
+    
     def on_dynamicIslandDrp_activated(self, index: int):
         if index == 0:
             tweaks["DynamicIsland"].set_enabled(False)
+            tweaks["RdarFix"].set_di_type(-1)
         else:
             tweaks["DynamicIsland"].set_selected_option(index - 1)
             tweaks["RdarFix"].set_di_type(tweaks["DynamicIsland"].value[tweaks["DynamicIsland"].get_selected_option()])
+        self.set_rdar_fix_label()
     def on_rdarFixChk_clicked(self, checked: bool):
         tweaks["RdarFix"].set_enabled(checked)
 
@@ -531,17 +544,37 @@ class MainWindow(QtWidgets.QMainWindow):
         tweaks["EUEnabler"].set_region_code(text)
 
     def on_enableAIChk_toggled(self, checked: bool):
-        tweaks["AIEligibility"].set_enabled(checked)
+        # tweaks["AIEligibility"].set_enabled(checked)
         tweaks["AIGestalt"].set_enabled(checked)
         # change the visibility of stuff
         if checked:
             self.ui.aiEnablerContent.show()
         else:
             self.ui.aiEnablerContent.hide()
+
+    def on_eligFileChk_toggled(self, checked: bool):
+        tweaks["AIEligibility"].set_enabled(checked)
+        if checked:
+            self.ui.languageTxt.show()
+            self.ui.languageLbl.show()
+        else:
+            self.ui.languageTxt.hide()
+            self.ui.languageLbl.hide()
+    def on_experimentalChk_toggled(self, checked: bool):
+        tweaks["AIExperiment"].set_enabled(checked)
+
     def on_languageTxt_textEdited(self, text: str):
         tweaks["AIEligibility"].set_language_code(text)
+    
     def on_spoofedModelDrp_activated(self, index: int):
         tweaks["SpoofModel"].set_selected_option(index)
+        tweaks["SpoofHardware"].set_selected_option(index)
+        if index == 0:
+            tweaks["SpoofCPU"].set_selected_option(0)
+        elif index == 1 or index == 2:
+            tweaks["SpoofCPU"].set_selected_option(1)
+        else:
+            tweaks["SpoofCPU"].set_selected_option(2)
 
 
     ## SPRINGBOARD OPTIONS PAGE
@@ -620,6 +653,9 @@ class MainWindow(QtWidgets.QMainWindow):
         if selected_file == "" or selected_file == None:
             self.device_manager.data_singleton.gestalt_path = None
             self.ui.gestaltLocationLbl.setText("None")
+            # show the warning labels
+            self.ui.mgaWarningLbl.show()
+            self.ui.mgaWarningLbl2.show()
         else:
             # verify that the gestalt is correct and compatible
             with open(selected_file, 'rb') as in_fp:
@@ -645,6 +681,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 dialog.exec()
             self.device_manager.data_singleton.gestalt_path = selected_file
             self.ui.gestaltLocationLbl.setText(selected_file)
+            # hide the warning labels
+            self.ui.mgaWarningLbl.hide()
+            self.ui.mgaWarningLbl2.hide()
 
     def update_label(self, txt: str):
         self.ui.statusLbl.setText(txt)

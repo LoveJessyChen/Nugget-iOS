@@ -790,6 +790,11 @@ QSlider::tick:horizontal {
              <number>0</number>
             </property>
             <widget class="QWidget" name="homePage">
+             <property name="font">
+              <font>
+               <family>.AppleSystemUIFont</family>
+              </font>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <property name="leftMargin">
                <number>0</number>
@@ -1566,7 +1571,7 @@ QToolButton:pressed {
               <item>
                <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Nugget GUI - Version 4.0</string>
+                 <string>Nugget GUI - Version 4.0.1</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1705,6 +1710,19 @@ QToolButton:pressed {
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="mgaWarningLbl">
+                <property name="font">
+                 <font>
+                  <pointsize>-1</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>! Your device's mobilegestalt file is required for this feature. Select it on the apply page.</string>
                 </property>
                </widget>
               </item>
@@ -2647,6 +2665,19 @@ QComboBox QAbstractItemView::item:hover {
                   </widget>
                  </item>
                  <item>
+                  <widget class="QLabel" name="mgaWarningLbl2">
+                   <property name="font">
+                    <font>
+                     <pointsize>-1</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>! Your device's mobilegestalt file is required for this feature. Select it on the apply page.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="enableAIChk">
                    <property name="text">
                     <string>Enable Apple Intelligence (for Unsupported Devices)</string>
@@ -2668,6 +2699,20 @@ QComboBox QAbstractItemView::item:hover {
                     <property name="bottomMargin">
                      <number>5</number>
                     </property>
+                    <item>
+                     <widget class="QCheckBox" name="eligFileChk">
+                      <property name="text">
+                       <string>Enable Eligibility File (test)</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="experimentalChk">
+                      <property name="text">
+                       <string>Experimental Toggle</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QLabel" name="languageLbl">
                       <property name="text">
@@ -2709,8 +2754,9 @@ QComboBox QAbstractItemView::item:hover {
                        <string>In order to download the AI model, you must spoof the device model. This will break Face ID until
 you revert.
 
-Once the model has downloaded, set &quot;Spoofed Device Model&quot; to &quot;None&quot; and click the &quot;Apply Tweaks&quot;
-button on the &quot;Apply&quot; page again to fix Face ID.</string>
+Once the model has downloaded, turn off &quot;Apple Intelligence&quot; in Settings then set
+&quot;Spoofed Device Model&quot; to &quot;None&quot; and click the &quot;Apply Tweaks&quot; button on the &quot;Apply&quot; page
+again to fix Face ID.</string>
                       </property>
                       <property name="textFormat">
                        <enum>Qt::AutoText</enum>
@@ -2779,7 +2825,17 @@ QComboBox QAbstractItemView::item:hover {
                       </item>
                       <item>
                        <property name="text">
-                        <string>iPhone16,2 (iPhone 15 Pro)</string>
+                        <string>iPhone16,1 (iPhone 15 Pro)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>iPhone16,2 (iPhone 15 Pro Max)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>iPhone17,3 (iPhone 16)</string>
                        </property>
                       </item>
                       <item>
@@ -2789,7 +2845,7 @@ QComboBox QAbstractItemView::item:hover {
                       </item>
                       <item>
                        <property name="text">
-                        <string>iPhone17,3 (iPhone 16 Pro)</string>
+                        <string>iPhone17,1 (iPhone 16 Pro)</string>
                        </property>
                       </item>
                       <item>

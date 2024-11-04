@@ -50,6 +50,8 @@ class DeviceManager:
                 If you are on Linux, make sure you have usbmuxd and libimobiledevice installed.
                 """
             )
+            self.set_current_device(index=None)
+            return
         # Connect via usbmuxd
         for device in connected_devices:
             if self.apply_over_wifi or device.is_usb:
@@ -57,13 +59,27 @@ class DeviceManager:
                     ld = create_using_usbmux(serial=device.serial)
                     vals = ld.all_values
                     model = vals['ProductType']
+                    hardware = vals['HardwareModel']
+                    cpu = vals['HardwarePlatform']
                     try:
                         product_type = settings.value(device.serial + "_model", "", type=str)
+                        hardware_type = settings.value(device.serial + "_hardware", "", type=str)
+                        cpu_type = settings.value(device.serial + "_cpu", "", type=str)
                         if product_type == "":
                             # save the new product type
                             settings.setValue(device.serial + "_model", model)
                         else:
                             model = product_type
+                        if hardware_type == "":
+                            # save the new hardware model
+                            settings.setValue(device.serial + "_hardware", hardware)
+                        else:
+                            hardware = hardware_type
+                        if cpu_type == "":
+                            # save the new cpu model
+                            settings.setValue(device.serial + "_cpu", cpu)
+                        else:
+                            cpu = cpu_type
                     except:
                         pass
                     dev = Device(
@@ -72,6 +88,8 @@ class DeviceManager:
                             version=vals['ProductVersion'],
                             build=vals['BuildVersion'],
                             model=model,
+                            hardware=hardware,
+                            cpu=cpu,
                             locale=ld.locale,
                             ld=ld
                         )
@@ -80,6 +98,9 @@ class DeviceManager:
                 except Exception as e:
                     print(f"ERROR with lockdown device with UUID {device.serial}")
                     show_error_msg(type(e).__name__ + ": " + repr(e))
+                    connected_devices.remove(device)
+            else:
+                connected_devices.remove(device)
         
         if len(connected_devices) > 0:
             self.set_current_device(index=0)
@@ -94,6 +115,8 @@ class DeviceManager:
             self.data_singleton.gestalt_path = None
             self.current_device_index = 0
             tweaks["SpoofModel"].value[0] = "Placeholder"
+            tweaks["SpoofHardware"].value[0] = "Placeholder"
+            tweaks["SpoofCPU"].value[0] = "Placeholder"
         else:
             self.data_singleton.current_device = self.devices[index]
             if Version(self.devices[index].version) < Version("17.0"):
@@ -102,6 +125,8 @@ class DeviceManager:
             else:
                 self.data_singleton.device_available = True
                 tweaks["SpoofModel"].value[0] = self.data_singleton.current_device.model
+                tweaks["SpoofHardware"].value[0] = self.data_singleton.current_device.hardware
+                tweaks["SpoofCPU"].value[0] = self.data_singleton.current_device.cpu
             self.current_device_index = index
         
     def get_current_device_name(self) -> str:
@@ -150,8 +175,12 @@ class DeviceManager:
             # add the 2 skip setup files
             cloud_config_plist: dict = {
                 "SkipSetup": ["WiFi", "Location", "Restore", "SIMSetup", "Android", "AppleID", "IntendedUser", "TOS", "Siri", "ScreenTime", "Diagnostics", "SoftwareUpdate", "Passcode", "Biometric", "Payment", "Zoom", "DisplayTone", "MessagingActivationUsingPhoneNumber", "HomeButtonSensitivity", "CloudStorage", "ScreenSaver", "TapToSetup", "Keyboard", "PreferredLanguage", "SpokenLanguage", "WatchMigration", "OnBoarding", "TVProviderSignIn", "TVHomeScreenSync", "Privacy", "TVRoom", "iMessageAndFaceTime", "AppStore", "Safety", "Multitasking", "ActionButton", "TermsOfAddress", "AccessibilityAppearance", "Welcome", "Appearance", "RestoreCompleted", "UpdateCompleted"],
+                "AllowPairing": True,
+                "ConfigurationWasApplied": True,
                 "CloudConfigurationUIComplete": True,
-                "IsSupervised": False
+                "ConfigurationSource": 0,
+                "PostSetupProfileWasInstalled": True,
+                "IsSupervised": False,
             }
             files_to_restore.append(FileToRestore(
                 contents=plistlib.dumps(cloud_config_plist),
@@ -309,6 +338,12 @@ class DeviceManager:
                 detailsBox.setText("Find My must be disabled in order to use this tool.")
                 detailsBox.setDetailedText("Disable Find My from Settings (Settings -> [Your Name] -> Find My) and then try again.")
                 detailsBox.exec()
+            elif "SessionInactive" in str(e):
+                detailsBox = QMessageBox()
+                detailsBox.setIcon(QMessageBox.Critical)
+                detailsBox.setWindowTitle("Error!")
+                detailsBox.setText("The session was terminated. Refresh the device list and try again.")
+                detailsBox.exec()
             else:
                 print(traceback.format_exc())
                 update_label("Failed to restore")
@@ -319,8 +354,10 @@ class DeviceManager:
         # restore to the device
         update_label("Restoring to device...")
         try:
-            # remove the saved device model
+            # remove the saved device model, hardware, and cpu
             settings.setValue(self.data_singleton.current_device.uuid + "_model", "")
+            settings.setValue(self.data_singleton.current_device.uuid + "_hardware", "")
+            settings.setValue(self.data_singleton.current_device.uuid + "_cpu", "")
             domain, file_path = self.get_domain_for_path("/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches/com.apple.MobileGestalt.plist")
             restore_files(files=[FileToRestore(
                     contents=b"",
