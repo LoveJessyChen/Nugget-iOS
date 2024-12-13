@@ -111,7 +111,7 @@ If you would like to read more about the inner workings of the exploit and iOS r
 
 ## Credits
 - [LeminLimez](https://github.com/leminlimez) for [Nugget](https://github.com/leminlimez/Nugget)
-- JJTech](https://github.com/JJTech0130) for Sparserestore/[TrollRestore](https://github.com/JJTech0130/TrollRestore)
+- [JJTech](https://github.com/JJTech0130) for Sparserestore/[TrollRestore](https://github.com/JJTech0130/TrollRestore)
 - [disfordottie](https://x.com/disfordottie) for some global flag features
 - [Mikasa-san](https://github.com/Mikasa-san) for [Quiet Daemon](https://github.com/Mikasa-san/QuietDaemon)
 - [sneakyf1shy](https://github.com/f1shy-dev) for [AI Eligibility](https://gist.github.com/f1shy-dev/23b4a78dc283edd30ae2b2e6429129b5) (iOS 18.1 beta 4 and below)
