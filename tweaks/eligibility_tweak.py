@@ -1,4 +1,4 @@
-from .tweak_classes import Tweak, TweakModifyType
+from .tweak_classes import Tweak
 from Sparserestore.restore import FileToRestore
 from devicemanagement.constants import Version
 
@@ -22,12 +22,8 @@ def replace_region_code(plist_path: str, original_code: str = "US", new_code: st
     return plistlib.dumps(updated_plist_data)
 
 class EligibilityTweak(Tweak):
-    def __init__(
-            self, label: str,
-            min_version: Version = Version("1.0"),
-            divider_below: bool = False
-        ):
-        super().__init__(label=label, key=None, value=["Method 1", "Method 2"], edit_type=TweakModifyType.PICKER, min_version=min_version, divider_below=divider_below)
+    def __init__(self):
+        super().__init__(key=None, value=["Method 1", "Method 2"])
         self.code = "US"
         self.method = 0 # between 0 and 1
 
@@ -90,7 +86,7 @@ class EligibilityTweak(Tweak):
 
 class AITweak(Tweak):
     def __init__(self):
-        super().__init__(label="Enable Apple Intelligence (for Unsupported Devices) (Eligibility)", key=None, value="", min_version=Version("18.1"))
+        super().__init__(key=None, value="")
     
     def set_language_code(self, lang: str):
         self.value = lang
