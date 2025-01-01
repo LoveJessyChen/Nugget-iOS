@@ -1,9 +1,9 @@
 # Nugget
 Unlock your device's full potential!
 
-Sparserestore works on all versions iOS 17.0-17.7 and iOS 18.0-18.1 beta 4. There is partial support for iOS 17.7.1 and iOS 18.1b5-18.2 beta 2.
+Sparserestore works on all versions iOS 17.0-18.2 developer beta 2. There is partial support for iOS 18.2 developer beta 3 and newer.
 
-**iOS 18.2 developer beta 3 (public beta 2) and newer is not supported.**
+**Mobilegestalt and AI Enabler tweaks are not supported on iOS 18.2+.** It will never be supported, do not make issues asking for when it is supported.
 
 Make sure you have installed the [requirements](#requirements) if you are on Windows or Linux.
 
@@ -53,6 +53,14 @@ Note: I am not responsible if your device bootloops. Please back up your data be
   - VPN
   - Chinese WLAN service
   - HealthKit
+  - HealthKit
+  - AirPrint
+  - Assistive Touch
+  - iCloud
+  - Internet Tethering (aka Personal Hotspot)
+  - PassBook
+  - Spotlight
+  - Voice Control
 - Risky (Hidden) Options:
   - Disable thermalmonitord
   - OTA Killer
@@ -111,7 +119,7 @@ If you would like to read more about the inner workings of the exploit and iOS r
 
 ## Credits
 - [LeminLimez](https://github.com/leminlimez) for [Nugget](https://github.com/leminlimez/Nugget)
-- JJTech](https://github.com/JJTech0130) for Sparserestore/[TrollRestore](https://github.com/JJTech0130/TrollRestore)
+- [JJTech](https://github.com/JJTech0130) for Sparserestore/[TrollRestore](https://github.com/JJTech0130/TrollRestore)
 - [disfordottie](https://x.com/disfordottie) for some global flag features
 - [Mikasa-san](https://github.com/Mikasa-san) for [Quiet Daemon](https://github.com/Mikasa-san/QuietDaemon)
 - [sneakyf1shy](https://github.com/f1shy-dev) for [AI Eligibility](https://gist.github.com/f1shy-dev/23b4a78dc283edd30ae2b2e6429129b5) (iOS 18.1 beta 4 and below)
