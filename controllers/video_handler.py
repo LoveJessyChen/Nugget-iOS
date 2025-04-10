@@ -43,7 +43,7 @@ def create_caml(video_path: str, output_file: str, auto_reverses: bool, update_l
     cam = cv2.VideoCapture(video_path)
     assets_path = os.path.join(output_file, "assets")
     frame_count = int(cam.get(cv2.CAP_PROP_FRAME_COUNT))
-    FRAME_LIMIT = 300
+    FRAME_LIMIT = 400
     reverse = 0
     if auto_reverses:
         reverse = 1
@@ -87,11 +87,10 @@ def create_caml(video_path: str, output_file: str, auto_reverses: bool, update_l
                 name = 'assets/' + str(currentframe) + '.jpg'
                 if update_label:
                     update_label('Creating...' + name)
-                else:
-                    print ('Creating...' + name)
+                print('Creating...' + name)
         
                 # writing the extracted images
-                cv2.imwrite(os.path.join(output_file, name), frame)
+                cv2.imwrite(os.path.join(output_file.removeprefix(u"\\\\?\\"), name), frame)
                 caml.write(f"\t\t\t<CGImage src=\"{name}\"/>\n")
         
                 # increasing counter so that it will
