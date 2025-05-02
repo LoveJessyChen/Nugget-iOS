@@ -176,14 +176,7 @@ Sparserestore works on all versions iOS 17.0-18.1.1. There is partial support fo
 If you would like to read more about the inner workings of the exploit and iOS restore system, I made a write up which you can read [here][ReadMoreGist].
 For clarity, up to iOS 18.2 developer beta 2 (public beta 1) is fully supported by Nugget. I said iOS 18.1.1 because mentioning the betas confused people.
 
-## Arbitrary Star Graph
-<a href="https://www.star-history.com/#leminlimez/Nugget&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=leminlimez/Nugget&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=leminlimez/Nugget&type=Date" />
-    <img alt="Star History" src="https://api.star-history.com/svg?repos=leminlimez/Nugget&type=Date" />
-  </picture>
-</a>
+
 
 ## Credits
 - [LeminLimez](https://github.com/leminlimez) for [Nugget](https://github.com/leminlimez/Nugget)
