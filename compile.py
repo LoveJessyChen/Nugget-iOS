@@ -1,10 +1,14 @@
-from sys import platform
+from sys import platform, argv
 import os
 
 import PyInstaller.__main__
 
-# configuration
-universal: bool = False # issues with cross compiling since cpython only gives a single arch
+target_arch=None
+
+for n in argv:
+    if n.startswith("--target-arch="):
+        print(f"Target arch: {n}")
+        target_arch=n
 
 args = [
     'main_app.py',
@@ -18,16 +22,18 @@ args = [
     '--onedir',
     '--noconfirm',
     '--name=Nugget',
-    '--icon=nugget.ico',
-    '--optimize=2'
+    '--icon=nugget.ico'
 ]
+
+if target_arch == None:
+    args.append('--optimize=2')
 
 if platform == "darwin":
     # add --windowed arg for macOS
     args.append('--windowed')
     args.append('--osx-bundle-identifier=com.leemin.Nugget')
-    if universal:
-        args.append('--target-arch=universal2')
+    if target_arch != None:
+        args.append(target_arch)
     # codesigning resources
     try:
         import secrets.compile_config as compile_config
@@ -38,5 +44,9 @@ if platform == "darwin":
 elif os.name == 'nt':
     # add windows version info
     args.append('--version-file=version.txt')
+    if os.path.exists("ffmpeg/bin"):
+        args.append('--add-data=ffmpeg/bin:ffmpeg/bin')
+    else:
+        print("ffmpeg not found!")
 
 PyInstaller.__main__.run(args)
