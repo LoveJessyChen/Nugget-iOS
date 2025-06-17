@@ -19,6 +19,20 @@ Make sure you have installed the [requirements](#requirements) if you are on Win
   - Converting videos to wallpapers
   - Customizing community-made wallpapers via batter files
   - See documentation on the structure of tendies and batter files in [documentation.md](documentation.md)
+- Templates: Custom Operations and file editing
+  - See documentation on the structure of batter files in [documentation.md](documentation.md)
+- Status Bar
+  - Change carrier name
+  - Change secondary carrier name
+  - Enable/Disable the primary or secondary carriers
+  - Change the number of WiFi/Cellular bars
+  - Change the battery capacity
+  - Change battery display detail
+  - Change time text
+  - Change date text (iPad only)
+  - Change breadcrumb text
+  - Show numeric WiFi/Cellular strength
+  - Hide or show many icons in the status bar
 - Springboard Options (from [Cowabunga Lite][CowabungaLite])
   - Set Lock Screen Footnote
   - Disable Lock After Respring
@@ -57,7 +71,7 @@ Make sure you have installed the [requirements](#requirements) if you are on Win
   - Custom Resolution
   </details>
 <details>
-<summary>iOS 17.0 - iOS 18.1.1</summary>
+<summary>iOS 17.0 - 18.1.1</summary>
 
 - Enable Dynamic Island on any device
 - Enable iPhone X gestures on iPhone SEs
@@ -76,20 +90,20 @@ Make sure you have installed the [requirements](#requirements) if you are on Win
 - EU Enabler (iOS 17.6-)
 </details>
 <details>
-<summary>iOS 18.0 - iOS 18.0.1</summary>
+<summary>iOS 18.0 - 18.0.1</summary>
 
 - Feature Flags (iOS 18.1b4-):
   - Enabling lock screen clock animation, lock screen page duplication button, and more!
   - Disabling the new iOS 18 Photos UI (iOS 18.0 betas only, unknown which patched it)
   </details>
 <details>
-<summary>iOS 18.0 - iOS 18.1.1</summary>
+<summary>iOS 18.0 - 18.1.1</summary>
 
 - Enable iPhone 16 camera button page in the Settings app
 - Enable AOD & AOD Vibrancy on any device
 </details>
 <details>
-<summary>iOS 18.1 - iOS 18.1.1</summary>
+<summary>iOS 18.1 - 18.1.1</summary>
 
 - AI Enabler
 - Device Spoofing
@@ -175,8 +189,6 @@ Sparserestore works on all versions iOS 17.0-18.1.1. There is partial support fo
 ## Read More
 If you would like to read more about the inner workings of the exploit and iOS restore system, I made a write up which you can read [here][ReadMoreGist].
 For clarity, up to iOS 18.2 developer beta 2 (public beta 1) is fully supported by Nugget. I said iOS 18.1.1 because mentioning the betas confused people.
-
-
 
 ## Credits
 - [LeminLimez](https://github.com/leminlimez) for [Nugget](https://github.com/leminlimez/Nugget)
